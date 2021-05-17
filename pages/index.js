@@ -7,7 +7,7 @@ function fetcherJson(...args) {
 }
 
 function RawData() {
-  const { data, error } = useSWR("/data/raw/loadpara.json", fetcherJson);
+  const { data, error } = useSWR("/taipower/data/raw/loadpara.json", fetcherJson);
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
