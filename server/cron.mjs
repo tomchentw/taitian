@@ -10,23 +10,25 @@ const URL_LIST = [
   {
     pathname: `loadpara.json`,
     url: `https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/loadpara.json`,
-  }
+  },
 ];
 
 async function run() {
   await fs.promises.mkdir(RAW_DIR, { recursive: true });
-  await Promise.allSettled(URL_LIST.map(async ({ pathname, url }) => {
-    const text = await fetch(url).then(r => r.text());
-    const dataPath = path.join(RAW_DIR, pathname);
-    await fs.promises.writeFile(dataPath, text);
-  }));
+  await Promise.allSettled(
+    URL_LIST.map(async ({ pathname, url }) => {
+      const text = await fetch(url).then((r) => r.text());
+      const dataPath = path.join(RAW_DIR, pathname);
+      await fs.promises.writeFile(dataPath, text);
+    })
+  );
 }
 
 run()
-  .then(it => {
+  .then((it) => {
     console.log(`Done`);
   })
-  .catch(error => {
+  .catch((error) => {
     console.error(error);
     process.exit(1);
   });
