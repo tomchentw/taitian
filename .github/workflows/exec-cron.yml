@@ -1,6 +1,7 @@
 name: Run cron script on scheulde
 
 on:
+  workflow_dispatch:
   schedule:
     # Adjust refresh schedule here. By default, it runs once per day.
     # Syntax reference: https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule
@@ -23,9 +24,10 @@ jobs:
       - run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@^6
       - run: pnpm install
       - run: pnpm cron
-      - name: Commit & Push changes
-        uses: actions-js/push@master
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          message: "chore: update data"
-          branch: main
+          keep_files: true
+          publish_dir: ./public/data
+          destination_dir: ./data
