@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import fetch from "node-fetch";
+import crawl from "./crawl.mjs";
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url));
 const TIMEPATH = path.join(DIRNAME, `../public/data/time`);
@@ -9,13 +9,6 @@ const RAW_DIR = path.join(DIRNAME, `../public/data/raw`);
 
 const INTERVAL = 10 * 60 * 1000; // 10 minutes
 const EXECUTION_TIME = 3 * 1000; // 3 seconds
-
-const URL_LIST = [
-  {
-    pathname: `loadpara.json`,
-    url: `https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/loadpara.json`,
-  },
-];
 
 async function run() {
   // Setup
@@ -35,14 +28,8 @@ async function run() {
         })()
       : Promise.resolve(),
   ]);
-  // Crawl
-  await Promise.allSettled(
-    URL_LIST.map(async ({ pathname, url }) => {
-      const text = await fetch(url).then((r) => r.text());
-      const dataPath = path.join(RAW_DIR, pathname);
-      await fs.promises.writeFile(dataPath, text);
-    })
-  );
+  // Exec
+  await crawl();
   // Finish
   fs.writeFileSync(TIMEPATH, `${Date.now()}`);
 }
