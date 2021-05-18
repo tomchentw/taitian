@@ -2,10 +2,6 @@ name: Run cron script on scheulde
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - gh-pages
-  page_build:
   schedule:
     # Adjust refresh schedule here. By default, it runs once per day.
     # Syntax reference: https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule
