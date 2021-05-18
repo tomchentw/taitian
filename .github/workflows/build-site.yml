@@ -26,6 +26,7 @@ jobs:
           dst_path: /public/data
           dst_owner: tomchentw
           dst_repo_name: taipower
+          dst_branch: main
       - run: pnpm build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
