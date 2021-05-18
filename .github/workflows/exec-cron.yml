@@ -37,7 +37,7 @@ jobs:
       - name: Deploy Data to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
           keep_files: true
           publish_dir: ./public/data
           destination_dir: ./data
