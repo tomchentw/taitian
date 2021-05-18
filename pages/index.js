@@ -9,7 +9,7 @@ function fetcherJson(...args) {
 
 function TodayData() {
   const { data, error } = useSWR(
-    `/taipower/data/raw/loadpara.json`,
+    `/taitian/data/raw/loadpara.json`,
     fetcherJson
   );
 
