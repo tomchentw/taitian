@@ -22,6 +22,11 @@ jobs:
         with:
           node-version: "16"
       - run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@^6
+      - uses: actions/cache@v2
+        id: pnpm-cache # use this to check for `cache-hit` (`steps.pnpm-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm cron
       - name: Deploy Data to GitHub Pages
