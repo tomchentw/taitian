@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: "16"
       - run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@^6
-      - run: pnpm install
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
