@@ -1,0 +1,21 @@
+name: Write current time
+
+on:
+  push:
+    branches:
+      - gh-pages
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: mkdir -p ./public/data
+      - run: date +%s%N | cut -b1-10 > ./public/data/time
+      - name: Deploy Time to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          keep_files: true
+          publish_dir: ./public/data
+          destination_dir: ./data
