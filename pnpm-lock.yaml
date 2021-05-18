@@ -2,6 +2,8 @@ lockfileVersion: 5.3
 
 specifiers:
   '@chakra-ui/react': ^1.6.2
+  '@chakra-ui/system': ^1.6.6
+  '@chakra-ui/theme': ^1.9.0
   '@emotion/react': ^11.4.0
   '@emotion/styled': ^11.3.0
   framer-motion: ^4.1.17
@@ -13,6 +15,8 @@ specifiers:
 
 dependencies:
   '@chakra-ui/react': 1.6.2_fe7a3d9611844bee60512fda989c32eb
+  '@chakra-ui/system': 1.6.6_7874f5fd290ce587db5f5f81e8a37ea9
+  '@chakra-ui/theme': 1.9.0_@chakra-ui+system@1.6.6
   '@emotion/react': 11.4.0_react@17.0.2
   '@emotion/styled': 11.3.0_c94ce1a602d602ceca4c9cb32dbce62d
   framer-motion: 4.1.17_react-dom@17.0.2+react@17.0.2

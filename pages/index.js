@@ -46,8 +46,12 @@ function TodayData() {
 
   return (
     <React.Fragment>
-      <Chakra.Heading as="h3" size="lg" textAlign="right">
-        {publish_time} 更新
+      <Chakra.Heading as="h4" size="md" textAlign="right">
+        現時 {publish_time}
+        <br />
+        <Chakra.Text as="i" fontSize="sm">
+          資料來源每十分鐘自動更新
+        </Chakra.Text>
       </Chakra.Heading>
       <Chakra.SimpleGrid
         columns={[2, , 4]}
@@ -56,26 +60,25 @@ function TodayData() {
         as={Chakra.StatGroup}
       >
         <Chakra.Stat>
-          <Chakra.StatLabel>目前用電量</Chakra.StatLabel>
-          <Chakra.StatNumber>{curr_load} 萬瓩</Chakra.StatNumber>
-          <Chakra.StatHelpText>
-            目前使用率 {curr_util_rate}%
-          </Chakra.StatHelpText>
+          <Chakra.StatLabel>目前使用率</Chakra.StatLabel>
+          <Chakra.StatNumber> {curr_util_rate}%</Chakra.StatNumber>
+          <Chakra.StatHelpText>目前用電量 {curr_load} 萬瓩</Chakra.StatHelpText>
         </Chakra.Stat>
         <Chakra.Stat>
-          <Chakra.StatLabel>預估最高用電</Chakra.StatLabel>
-          <Chakra.StatNumber>{fore_peak_dema_load} 萬瓩</Chakra.StatNumber>
-          <Chakra.StatHelpText>
-            尖峰使用率{" "}
+          <Chakra.StatLabel>尖峰使用率</Chakra.StatLabel>
+          <Chakra.StatNumber>
             {((100 * fore_peak_dema_load) / fore_maxi_sply_capacity).toFixed(0)}
             %
+          </Chakra.StatNumber>
+          <Chakra.StatHelpText>
+            預估最高用電 {fore_peak_dema_load} 萬瓩
           </Chakra.StatHelpText>
         </Chakra.Stat>
         <Chakra.Stat>
-          <Chakra.StatLabel>預估最高用電時段</Chakra.StatLabel>
-          <Chakra.StatNumber>{fore_peak_hour_range}</Chakra.StatNumber>
+          <Chakra.StatLabel>最大供電能力</Chakra.StatLabel>
+          <Chakra.StatNumber>{fore_maxi_sply_capacity} 萬瓩</Chakra.StatNumber>
           <Chakra.StatHelpText>
-            最大供電能力 {fore_maxi_sply_capacity} 萬瓩
+            預估最高用電時段 {fore_peak_hour_range}
           </Chakra.StatHelpText>
         </Chakra.Stat>
         <Chakra.Stat>
@@ -87,7 +90,9 @@ function TodayData() {
                 {
                   G: "green",
                   Y: "yellow",
+                  O: "orange",
                   R: "tomato",
+                  B: "black",
                 }[fore_peak_resv_indicator]
               }
             />
