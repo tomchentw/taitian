@@ -27,12 +27,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
       - run: pnpm install --frozen-lockfile
-      - name: Copy Data From gh-pages
-        run: |
-          rm -rf public/data
-          git restore --source=origin/gh-pages data
-          mv data public/data
       - run: pnpm build
+      - name: Copy gh-pages files
+        run: |
+          cp -R .github out/.github
+          rm -rf out/data
+          git restore --source=origin/gh-pages data
+          mv data out/data
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
