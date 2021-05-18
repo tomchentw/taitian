@@ -38,5 +38,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           exclude_assets: ''
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Do NOT use PERSONAL_TOKEN here since this will trigger infinite loop on exec-cron.yml
           publish_dir: ./out

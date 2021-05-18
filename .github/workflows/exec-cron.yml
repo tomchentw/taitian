@@ -1,7 +1,7 @@
 name: Run cron script
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Trigger this inifinite loop MANUALLY!!!
   push:
     branches:
       - gh-pages
@@ -37,3 +37,7 @@ jobs:
           keep_files: true
           publish_dir: ./public/data
           destination_dir: ./data
+      - name: Sleep for 30 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '540s' # 9 minutes
