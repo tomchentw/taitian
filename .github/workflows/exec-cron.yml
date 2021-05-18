@@ -2,11 +2,12 @@ name: Run cron script on scheulde
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Run cron script on scheulde"]
-    branches: [main]
-    types: 
-      - completed
+  page_build:
+  schedule:
+    # Adjust refresh schedule here. By default, it runs once per day.
+    # Syntax reference: https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule
+    # Recommended tool: https://crontab.guru/
+    - cron: "* * * * *"
 
 jobs:
   build:
