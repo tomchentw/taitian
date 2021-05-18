@@ -7,6 +7,9 @@ const DIRNAME = path.dirname(fileURLToPath(import.meta.url));
 const TIMEPATH = path.join(DIRNAME, `../public/data/time`);
 const RAW_DIR = path.join(DIRNAME, `../public/data/raw`);
 
+const INTERVAL = 10 * 60 * 1000; // 10 minutes
+const EXECUTION_TIME = 3 * 1000; // 3 seconds
+
 const URL_LIST = [
   {
     pathname: `loadpara.json`,
@@ -15,15 +18,33 @@ const URL_LIST = [
 ];
 
 async function run() {
-  await fs.promises.mkdir(RAW_DIR, { recursive: true });
+  // Setup
+  await Promise.allSettled([
+    fs.promises.mkdir(RAW_DIR, { recursive: true }),
+    process.env.CI
+      ? (async () => {
+          const prevExecuteAt = parseInt(
+            await fs.promises.readFile(TIMEPATH, "utf-8")
+          );
+          const difference = Date.now() - prevExecuteAt;
+          if (difference < INTERVAL - EXECUTION_TIME) {
+            await new Promise((resolve) =>
+              setTimeout(resolve, INTERVAL - EXECUTION_TIME - difference)
+            );
+          }
+        })()
+      : Promise.resolve(),
+  ]);
+  // Crawl
   await Promise.allSettled(
     URL_LIST.map(async ({ pathname, url }) => {
       const text = await fetch(url).then((r) => r.text());
       const dataPath = path.join(RAW_DIR, pathname);
       await fs.promises.writeFile(dataPath, text);
-    }),
-    fs.promises.writeFile(TIMEPATH, `${Date.now()}`)
+    })
   );
+  // Finish
+  fs.writeFileSync(TIMEPATH, `${Date.now()}`);
 }
 
 run()
