@@ -11,7 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: git switch gh-pages
+        with:
+          ref: "gh-pages"
       - name: Deploy Data to Main
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -20,7 +21,7 @@ jobs:
           keep_files: true
           publish_dir: ./data
           destination_dir: ./public/data
-      - run: git switch main
+      - uses: actions/checkout@v2
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
