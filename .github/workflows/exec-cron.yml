@@ -26,7 +26,9 @@ jobs:
         id: pnpm-cache # use this to check for `cache-hit` (`steps.pnpm-cache.outputs.cache-hit != 'true'`)
         with:
           path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
       - run: pnpm install --frozen-lockfile
       - run: pnpm cron
       - name: Deploy Data to GitHub Pages
