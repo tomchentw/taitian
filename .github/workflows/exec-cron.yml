@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Sleep for 9 minutes
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '540s' # 9 minutes
       - uses: actions/checkout@v2
         with:
           ref: 'main'
@@ -37,7 +41,3 @@ jobs:
           keep_files: true
           publish_dir: ./public/data
           destination_dir: ./data
-      - name: Sleep for 30 seconds
-        uses: jakejarvis/wait-action@master
-        with:
-          time: '540s' # 9 minutes
