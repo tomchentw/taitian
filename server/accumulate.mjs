@@ -52,14 +52,19 @@ async function loadpara() {
     yday_peak_resv_rate,
     yday_peak_resv_indicator,
   ];
-  const [,legacyYear, month2Digit, day2Digit, zhDayOfTheWeek, hour, minute] =
-        publish_time.match(
-          // "110.05.19(三)02:20", "110.05.19(三)17:10",
-          /^(\d{3})\.(\d{2})\.(\d{2})\((\S)\)(\d{2})\:(\d{2})$/
-        );
+  const [, legacyYear, month2Digit, day2Digit, zhDayOfTheWeek, hour, minute] =
+    publish_time.match(
+      // "110.05.19(三)02:20", "110.05.19(三)17:10",
+      /^(\d{3})\.(\d{2})\.(\d{2})\((\S)\)(\d{2})\:(\d{2})$/
+    );
   const year = 1911 + _.parseInt(legacyYear);
 
-  const accumulatedDirPath = path.join(ACCUMULATED_DIR, `${year}`, month2Digit, day2Digit);
+  const accumulatedDirPath = path.join(
+    ACCUMULATED_DIR,
+    `${year}`,
+    month2Digit,
+    day2Digit
+  );
   const accumulatedFilePath = path.join(accumulatedDirPath, "loadpara.json");
   const [accumulated] = await Promise.all([
     fs.promises.readFile(accumulatedFilePath).then(jsonParser, (error) => {
