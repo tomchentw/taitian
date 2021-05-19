@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "cron": "node server/cron.mjs",
+    "cron": "TZ='Asia/Taipei' node server/cron.mjs",
     "dev": "next dev",
     "build": "next build && next export",
     "start": "next start"

@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import crawl from "./crawl.mjs";
+import accumulate from "./accumulate.mjs";
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url));
 const TIMEPATH = path.join(DIRNAME, `../public/data/time`);
@@ -30,6 +31,7 @@ async function run() {
   ]);
   // Exec
   await crawl();
+  await accumulate();
   // Finish
   fs.writeFileSync(TIMEPATH, `${Date.now()}`);
 }
