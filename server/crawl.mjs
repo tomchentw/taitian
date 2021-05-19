@@ -18,7 +18,7 @@ const URL_LIST = [
 ];
 
 export default async function crawl() {
-  await Promise.allSettled(
+  await Promise.all(
     URL_LIST.map(async ({ pathname, url }) => {
       const text = await fetch(url).then((r) => r.text());
       const dataPath = path.join(RAW_DIR, pathname);

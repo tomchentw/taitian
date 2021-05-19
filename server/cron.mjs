@@ -12,7 +12,7 @@ const EXECUTION_TIME = 3 * 1000; // 3 seconds
 
 async function run() {
   // Setup
-  await Promise.allSettled([
+  await Promise.all([
     fs.promises.mkdir(RAW_DIR, { recursive: true }),
     process.env.CI
       ? (async () => {
