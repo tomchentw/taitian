@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import https from "https";
 import { fileURLToPath } from "url";
 import fetch from "node-fetch";
 
@@ -18,6 +19,10 @@ const URL_LIST = [
   },
 ];
 
+const httpsAgent = new https.Agent({
+  keepAlive: true,
+});
+
 export default async function crawl() {
   await fs.promises.mkdir(RAW_DIR, { recursive: true });
   await Promise.all(
@@ -25,7 +30,7 @@ export default async function crawl() {
       while (true) {
         const dataPath = path.join(RAW_DIR, pathname);
         const [text, prevText] = await Promise.all([
-          fetch(url).then((r) => r.text()),
+          fetch(url, { agent: httpsAgent }).then((r) => r.text()),
           fs.promises.readFile(dataPath, "utf-8").catch((error) => {
             if ("ENOENT" !== error.code) {
               throw error;
