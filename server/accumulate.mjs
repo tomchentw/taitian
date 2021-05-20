@@ -8,105 +8,34 @@ const DIRNAME = path.dirname(fileURLToPath(import.meta.url));
 const RAW_DIR = path.join(DIRNAME, `../public/data/raw`);
 const ACCUMULATED_DIR = path.join(DIRNAME, `../public/data/accumulated`);
 
-const jsonParser = JSON.parse.bind(JSON);
+const taipeiFormat = new Intl.DateTimeFormat("en", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  timeZone: "Asia/Taipei",
+});
 
-async function loadpara() {
-  const {
-    records: [
-      { curr_load, curr_util_rate },
-      {
-        fore_maxi_sply_capacity,
-        fore_peak_dema_load,
-        fore_peak_resv_capacity,
-        fore_peak_resv_rate,
-        fore_peak_resv_indicator,
-        fore_peak_hour_range,
-        publish_time,
-      },
-      {
-        yday_date,
-        yday_maxi_sply_capacity,
-        yday_peak_dema_load,
-        yday_peak_resv_capacity,
-        yday_peak_resv_rate,
-        yday_peak_resv_indicator,
-      },
-    ],
-  } = await fs.promises
-    .readFile(path.join(RAW_DIR, "loadpara.json"))
-    .then(jsonParser);
-  const item = [
-    curr_load,
-    curr_util_rate,
-    fore_maxi_sply_capacity,
-    fore_peak_dema_load,
-    fore_peak_resv_capacity,
-    fore_peak_resv_rate,
-    fore_peak_resv_indicator,
-    fore_peak_hour_range,
-    publish_time,
-    yday_date,
-    yday_maxi_sply_capacity,
-    yday_peak_dema_load,
-    yday_peak_resv_capacity,
-    yday_peak_resv_rate,
-    yday_peak_resv_indicator,
-  ];
-  const [, legacyYear, month2Digit, day2Digit, zhDayOfTheWeek, hour, minute] =
-    publish_time.match(
-      // "110.05.19(三)02:20", "110.05.19(三)17:10",
-      /^(\d{3})\.(\d{2})\.(\d{2})\((\S)\)(\d{2})\:(\d{2})$/
-    );
-  const year = 1911 + _.parseInt(legacyYear);
-
-  const accumulatedDirPath = path.join(
-    ACCUMULATED_DIR,
-    `${year}`,
-    month2Digit,
-    day2Digit
+async function loadfueltype() {
+  const now = new Date();
+  const closeToMindnight = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    23,
+    50
   );
-  const accumulatedFilePath = path.join(accumulatedDirPath, "loadpara.json");
-  const [accumulated] = await Promise.all([
-    fs.promises.readFile(accumulatedFilePath).then(jsonParser, (error) => {
-      if ("ENOENT" !== error.code) {
-        throw error;
-      }
-      return {
-        _v: "1",
-        date: `${year}-${month2Digit}-${day2Digit}`,
-        zhDayOfTheWeek,
-        headers: [
-          "curr_load",
-          "curr_util_rate",
-          "fore_maxi_sply_capacity",
-          "fore_peak_dema_load",
-          "fore_peak_resv_capacity",
-          "fore_peak_resv_rate",
-          "fore_peak_resv_indicator",
-          "fore_peak_hour_range",
-          "publish_time",
-          "yday_date",
-          "yday_maxi_sply_capacity",
-          "yday_peak_dema_load",
-          "yday_peak_resv_capacity",
-          "yday_peak_resv_rate",
-          "yday_peak_resv_indicator",
-        ],
-        data: [],
-      };
-    }),
-    fs.promises.mkdir(accumulatedDirPath, { recursive: true }),
-  ]);
-  if (_.isEqual(item, _.last(accumulated.data))) {
+  if (now < closeToMindnight) {
     return;
   }
-  accumulated.data.push(item);
-  await fs.promises.writeFile(
-    accumulatedFilePath,
-    JSON.stringify(accumulated, null, 2)
-  );
+  const [{ value: month }, , { value: day }, , { value: year }] =
+    taipeiFormat.formatToParts(closeToMindnight);
+  const sourceFilePath = path.join(RAW_DIR, "loadfueltype.csv");
+  const accumulatedDirPath = path.join(ACCUMULATED_DIR, year, month, day);
+  await fs.promises.mkdir(accumulatedDirPath, { recursive: true });
+  const accumulatedFilePath = path.join(accumulatedDirPath, "loadfueltype.csv");
+  await fs.promises.copyFile(sourceFilePath, accumulatedFilePath);
 }
 
 export default async function accumulate() {
-  await Promise.all([loadpara()]);
+  await Promise.all([loadfueltype()]);
 }
