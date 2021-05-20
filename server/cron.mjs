@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import crawl from "./crawl.mjs";
 import accumulate from "./accumulate.mjs";
+import logger from "./logger.mjs";
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url));
 
@@ -13,9 +14,8 @@ async function run() {
 
 run()
   .then((it) => {
-    console.log(`Done`);
+    logger.info("Done!");
   })
   .catch((error) => {
-    console.error(error);
-    process.exit(1);
+    logger.fatal(error);
   });
