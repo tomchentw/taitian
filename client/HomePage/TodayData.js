@@ -1,5 +1,4 @@
 import * as Chakra from "@chakra-ui/react";
-import Head from "next/head";
 import * as React from "react";
 import useSWR from "swr";
 
@@ -7,7 +6,7 @@ function fetcherJson(...args) {
   return fetch(...args).then((r) => r.json());
 }
 
-function TodayData() {
+export default function TodayData() {
   const { data, error } = useSWR(`/data/raw/loadpara.json`, fetcherJson);
 
   if (error) return <div>failed to load</div>;
@@ -99,44 +98,6 @@ function TodayData() {
       <Chakra.Box as="pre" py={4} display="none">
         <Chakra.Code>{JSON.stringify(data, null, 2)}</Chakra.Code>
       </Chakra.Box>
-    </React.Fragment>
-  );
-}
-
-export default function Home() {
-  return (
-    <React.Fragment>
-      <Chakra.Container as="header">
-        <Chakra.Heading size="4xl" textAlign="center" py={20}>
-          台電資訊鏡像站
-        </Chakra.Heading>
-      </Chakra.Container>
-
-      <Chakra.Container as="main" maxW="container.lg">
-        <Chakra.Tabs isLazy>
-          <Chakra.TabList>
-            <Chakra.Tab>今日電力資訊</Chakra.Tab>
-          </Chakra.TabList>
-          <Chakra.TabPanels>
-            <Chakra.TabPanel>
-              <TodayData />
-            </Chakra.TabPanel>
-          </Chakra.TabPanels>
-        </Chakra.Tabs>
-      </Chakra.Container>
-
-      <Chakra.Container as="footer" py={4} textAlign="right">
-        <Chakra.Link
-          isExternal
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        >
-          Powered by VERCEL
-        </Chakra.Link>
-        .{" "}
-        <Chakra.Link isExternal href="https://github.com/tomchentw">
-          Author: @tomchentw
-        </Chakra.Link>
-      </Chakra.Container>
     </React.Fragment>
   );
 }
