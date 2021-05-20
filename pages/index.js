@@ -8,10 +8,7 @@ function fetcherJson(...args) {
 }
 
 function TodayData() {
-  const { data, error } = useSWR(
-    `/taitian/data/raw/loadpara.json`,
-    fetcherJson
-  );
+  const { data, error } = useSWR(`/data/raw/loadpara.json`, fetcherJson);
 
   if (error) return <div>failed to load</div>;
   if (!data) {
