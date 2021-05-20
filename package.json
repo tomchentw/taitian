@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.3.0",
     "@vercel/fetch": "^6.1.0",
     "bunyan": "^1.8.15",
+    "cross-spawn": "^7.0.3",
     "framer-motion": "^4.1.17",
     "lodash-es": "^4.17.21",
     "next": "10.2.0",
