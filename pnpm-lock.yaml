@@ -1,46 +1,53 @@
 lockfileVersion: 5.3
 
-specifiers:
-  '@chakra-ui/react': ^1.6.2
-  '@chakra-ui/system': ^1.6.6
-  '@chakra-ui/theme': ^1.9.0
-  '@emotion/react': ^11.4.0
-  '@emotion/styled': ^11.3.0
-  '@vercel/fetch': ^6.1.0
-  bunyan: ^1.8.15
-  cross-spawn: ^7.0.3
-  framer-motion: ^4.1.17
-  husky: ^6.0.0
-  lint-staged: ^11.0.0
-  lodash-es: ^4.17.21
-  next: 10.2.0
-  node-fetch: ^2.6.1
-  prettier: ^2.3.0
-  react: 17.0.2
-  react-dom: 17.0.2
-  swr: ^0.5.6
+importers:
 
-dependencies:
-  '@chakra-ui/react': 1.6.2_fe7a3d9611844bee60512fda989c32eb
-  '@chakra-ui/system': 1.6.6_7874f5fd290ce587db5f5f81e8a37ea9
-  '@chakra-ui/theme': 1.9.0_@chakra-ui+system@1.6.6
-  '@emotion/react': 11.4.0_react@17.0.2
-  '@emotion/styled': 11.3.0_c94ce1a602d602ceca4c9cb32dbce62d
-  '@vercel/fetch': 6.1.0_node-fetch@2.6.1
-  bunyan: 1.8.15
-  cross-spawn: 7.0.3
-  framer-motion: 4.1.17_react-dom@17.0.2+react@17.0.2
-  lodash-es: 4.17.21
-  next: 10.2.0_react-dom@17.0.2+react@17.0.2
-  node-fetch: 2.6.1
-  react: 17.0.2
-  react-dom: 17.0.2_react@17.0.2
-  swr: 0.5.6_react@17.0.2
+  .:
+    specifiers:
+      '@vercel/fetch': ^6.1.0
+      bunyan: ^1.8.15
+      cross-spawn: ^7.0.3
+      husky: ^6.0.0
+      lint-staged: ^11.0.0
+      lodash-es: ^4.17.21
+      next: 10.2.0
+      node-fetch: ^2.6.1
+      prettier: ^2.3.0
+    dependencies:
+      '@vercel/fetch': 6.1.0_node-fetch@2.6.1
+      bunyan: 1.8.15
+      cross-spawn: 7.0.3
+      lodash-es: 4.17.21
+      next: 10.2.0
+      node-fetch: 2.6.1
+    devDependencies:
+      husky: 6.0.0
+      lint-staged: 11.0.0
+      prettier: 2.3.0
 
-devDependencies:
-  husky: 6.0.0
-  lint-staged: 11.0.0
-  prettier: 2.3.0
+  client:
+    specifiers:
+      '@chakra-ui/react': ^1.6.2
+      '@chakra-ui/system': ^1.6.6
+      '@chakra-ui/theme': ^1.9.0
+      '@emotion/react': ^11.4.0
+      '@emotion/styled': ^11.3.0
+      framer-motion: ^4.1.17
+      next: 10.2.0
+      react: 17.0.2
+      react-dom: 17.0.2
+      swr: ^0.5.6
+    dependencies:
+      '@chakra-ui/react': 1.6.2_fe7a3d9611844bee60512fda989c32eb
+      '@chakra-ui/system': 1.6.6_7874f5fd290ce587db5f5f81e8a37ea9
+      '@chakra-ui/theme': 1.9.0_@chakra-ui+system@1.6.6
+      '@emotion/react': 11.4.0_react@17.0.2
+      '@emotion/styled': 11.3.0_c94ce1a602d602ceca4c9cb32dbce62d
+      framer-motion: 4.1.17_react-dom@17.0.2+react@17.0.2
+      next: 10.2.0_react-dom@17.0.2+react@17.0.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      swr: 0.5.6_react@17.0.2
 
 packages:
 
@@ -1009,6 +1016,25 @@ packages:
     resolution: {integrity: sha512-Nl3GexIUXsmuggkUqrRFyE/2k7UI44JaVzSywtXEyHzxpZm2a5bdMaWuC89pgLiFDDOqmbqyLAbtwm5lNxa7Eg==}
     dev: false
 
+  /@next/react-dev-overlay/10.2.0:
+    resolution: {integrity: sha512-PRIAoWog41hLN4iJ8dChKp4ysOX0Q8yiNQ/cwzyqEd3EjugkDV5OiKl3mumGKaApJaIra1MX6j1wgQRuLhuWMA==}
+    peerDependencies:
+      react: ^16.9.0 || ^17
+      react-dom: ^16.9.0 || ^17
+    dependencies:
+      '@babel/code-frame': 7.12.11
+      anser: 1.4.9
+      chalk: 4.0.0
+      classnames: 2.2.6
+      css.escape: 1.5.1
+      data-uri-to-buffer: 3.0.1
+      platform: 1.3.6
+      shell-quote: 1.7.2
+      source-map: 0.8.0-beta.0
+      stacktrace-parser: 0.1.10
+      strip-ansi: 6.0.0
+    dev: false
+
   /@next/react-dev-overlay/10.2.0_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-PRIAoWog41hLN4iJ8dChKp4ysOX0Q8yiNQ/cwzyqEd3EjugkDV5OiKl3mumGKaApJaIra1MX6j1wgQRuLhuWMA==}
     peerDependencies:
@@ -1123,10 +1149,6 @@ packages:
 
   /@types/node/10.12.18:
     resolution: {integrity: sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==}
-    dev: false
-
-  /@types/node/15.3.0:
-    resolution: {integrity: sha512-8/bnjSZD86ZfpBsDlCIkNXIvm+h6wi9g7IqL+kmFkQ+Wvu3JrasgLElfiPgoo8V8vVfnEi0QVS12gbl94h9YsQ==}
     dev: false
 
   /@types/node/15.3.1:
@@ -2374,7 +2396,7 @@ packages:
     resolution: {integrity: sha512-mk0umAQ5lT+CaOJ+Qp01N6kz48sJG2kr2n1rX0koqKf6FIygQV0qLOdN9SCYID4IVeSigDOcPeGLozdMLYfb5g==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
-      '@types/node': 15.3.0
+      '@types/node': 15.3.1
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: false
@@ -2614,6 +2636,79 @@ packages:
     hasBin: true
     dev: false
     optional: true
+
+  /next/10.2.0:
+    resolution: {integrity: sha512-PKDKCSF7s82xudu3kQhOEaokxggpbLEWouEUtzP6OqV0YqKYHF+Ff+BFLycEem8ixtTM2M6ElN0VRJcskJfxPQ==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      fibers: '>= 3.1.0'
+      node-sass: ^4.0.0 || ^5.0.0
+      react: ^16.6.0 || ^17
+      react-dom: ^16.6.0 || ^17
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.12.5
+      '@hapi/accept': 5.0.1
+      '@next/env': 10.2.0
+      '@next/polyfill-module': 10.2.0
+      '@next/react-dev-overlay': 10.2.0
+      '@next/react-refresh-utils': 10.2.0_react-refresh@0.8.3
+      '@opentelemetry/api': 0.14.0
+      assert: 2.0.0
+      ast-types: 0.13.2
+      browserify-zlib: 0.2.0
+      browserslist: 4.16.1
+      buffer: 5.6.0
+      caniuse-lite: 1.0.30001228
+      chalk: 2.4.2
+      chokidar: 3.5.1
+      constants-browserify: 1.0.0
+      crypto-browserify: 3.12.0
+      cssnano-simple: 2.0.0_postcss@8.2.13
+      domain-browser: 4.19.0
+      encoding: 0.1.13
+      etag: 1.8.1
+      find-cache-dir: 3.3.1
+      get-orientation: 1.1.2
+      https-browserify: 1.0.0
+      jest-worker: 27.0.0-next.5
+      native-url: 0.3.4
+      node-fetch: 2.6.1
+      node-html-parser: 1.4.9
+      node-libs-browser: 2.2.1
+      os-browserify: 0.3.0
+      p-limit: 3.1.0
+      path-browserify: 1.0.1
+      pnp-webpack-plugin: 1.6.4
+      postcss: 8.2.13
+      process: 0.11.10
+      prop-types: 15.7.2
+      querystring-es3: 0.2.1
+      raw-body: 2.4.1
+      react-is: 16.13.1
+      react-refresh: 0.8.3
+      stream-browserify: 3.0.0
+      stream-http: 3.1.1
+      string_decoder: 1.3.0
+      styled-jsx: 3.3.2
+      timers-browserify: 2.0.12
+      tty-browserify: 0.0.1
+      use-subscription: 1.5.1
+      util: 0.12.3
+      vm-browserify: 1.1.2
+      watchpack: 2.1.1
+    transitivePeerDependencies:
+      - typescript
+      - webpack
+    dev: false
 
   /next/10.2.0_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-PKDKCSF7s82xudu3kQhOEaokxggpbLEWouEUtzP6OqV0YqKYHF+Ff+BFLycEem8ixtTM2M6ElN0VRJcskJfxPQ==}
@@ -3444,6 +3539,21 @@ packages:
       tslib: 2.2.0
     dev: false
 
+  /styled-jsx/3.3.2:
+    resolution: {integrity: sha512-daAkGd5mqhbBhLd6jYAjYBa9LpxYCzsgo/f6qzPdFxVB8yoGbhxvzQgkC0pfmCVvW3JuAEBn0UzFLBfkHVZG1g==}
+    peerDependencies:
+      react: 15.x.x || 16.x.x || 17.x.x
+    dependencies:
+      '@babel/types': 7.8.3
+      babel-plugin-syntax-jsx: 6.18.0
+      convert-source-map: 1.7.0
+      loader-utils: 1.2.3
+      source-map: 0.7.3
+      string-hash: 1.1.3
+      stylis: 3.5.4
+      stylis-rule-sheet: 0.0.10_stylis@3.5.4
+    dev: false
+
   /styled-jsx/3.3.2_react@17.0.2:
     resolution: {integrity: sha512-daAkGd5mqhbBhLd6jYAjYBa9LpxYCzsgo/f6qzPdFxVB8yoGbhxvzQgkC0pfmCVvW3JuAEBn0UzFLBfkHVZG1g==}
     peerDependencies:
@@ -3631,6 +3741,14 @@ packages:
       detect-node-es: 1.1.0
       react: 17.0.2
       tslib: 1.14.1
+    dev: false
+
+  /use-subscription/1.5.1:
+    resolution: {integrity: sha512-Xv2a1P/yReAjAbhylMfFplFKj9GssgTwN7RlcTxBujFQcloStWNDQdc4g4NRWH9xS4i/FDk04vQBptAXoF3VcA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0
+    dependencies:
+      object-assign: 4.1.1
     dev: false
 
   /use-subscription/1.5.1_react@17.0.2:
