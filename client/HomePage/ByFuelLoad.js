@@ -27,11 +27,25 @@ function fetcher(...args) {
 }
 
 export default function ByFuelLoad() {
-  const { data, error } = useSWR(`/data/raw/loadfueltype.csv`, fetcher, {
-    refreshInterval: 5 * 60 * 1000,
-  });
+  const { data: response, error } = useSWR(
+    `/data/raw/loadfueltype.csv`,
+    fetcher,
+    {
+      refreshInterval: 5 * 60 * 1000,
+    }
+  );
+  const [hoveringYIndex, setHoveringYIndex] = React.useState();
+  const onMouseEnter = React.useCallback(
+    ({ currentTarget: { dataset } }) => {
+      setHoveringYIndex(parseInt(dataset.index, 10));
+    },
+    [setHoveringYIndex]
+  );
+  const onMouseLeave = React.useCallback(() => {
+    setHoveringYIndex(undefined);
+  }, [setHoveringYIndex]);
   if (error) return <div>failed to load</div>;
-  if (!data) {
+  if (!response) {
     return (
       <Chakra.Center p={20}>
         <Chakra.Spinner size="xl" />
@@ -41,42 +55,81 @@ export default function ByFuelLoad() {
   return (
     <React.Fragment>
       <Chakra.Heading as="h4" size="md" textAlign="right">
-        現時 {dateTimeFullFormat.format(data.lastModified)}
+        現時 {dateTimeFullFormat.format(response.lastModified)}
         <br />
         <Chakra.Text as="i" fontSize="sm">
           資料來源每十分鐘自動更新
         </Chakra.Text>
       </Chakra.Heading>
-      <ParentSize style={{ minHeight: 480 }}>
-        {({ width, height }) =>
-          width > 10 && (
-            <Graph width={width} height={height} data={data.table} />
-          )
-        }
-      </ParentSize>
+      <Chakra.Stack direction={["column", , "row"]} spacing={2}>
+        <Chakra.List
+          order={[, , -1]}
+          minWidth={[, , 36]}
+          spacing={2}
+          alignSelf="center"
+        >
+          {Y_RANGE.map(({ title, color }, index) => (
+            <Chakra.ListItem
+              key={title}
+              display="flex"
+              alignContent="center"
+              cursor="pointer"
+              data-index={index}
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+            >
+              <Chakra.Text fontSize="sm" flex="1">
+                {title}
+              </Chakra.Text>
+              <Chakra.Circle size={6} bgColor={color} ml={4} />
+            </Chakra.ListItem>
+          )).reverse()}
+        </Chakra.List>
+        <Chakra.Box
+          as={ParentSize}
+          minHeight={600}
+          order={0}
+          sx={{
+            "& svg path": {
+              transition: "opacity 0.2s ease-in-out",
+            },
+            "& svg path:not(:hover):not([opacity])": {
+              opacity: 0.6,
+            },
+          }}
+        >
+          {({ width, height }) =>
+            width > 10 && (
+              <Graph
+                width={width}
+                height={height}
+                hoveringYIndex={hoveringYIndex}
+                table={response.table}
+              />
+            )
+          }
+        </Chakra.Box>
+      </Chakra.Stack>
     </React.Fragment>
   );
 }
 
-const FILL_COLOR_LIST = [
-  undefined, // time slot
-  "#CC0099",
-  "#E65C00",
-  "#E6E600",
-  "#FFA347",
-  "#006600",
-  "#5EDFDF",
-  "#FF1919",
-  "#848484",
-  "#0000B2",
-  "#009933",
-  "#00CC00",
-  "#3366CC",
-  "#6699FF",
-  "#FACC2E",
+const Y_RANGE = [
+  { title: "核能(Nuclear)", color: "#CC0099" },
+  { title: "燃煤(Coal)", color: "#E65C00" },
+  { title: "汽電共生(Co-Gen)", color: "#E6E600" },
+  { title: "民營電廠-燃煤(IPP Coal)", color: "#FFA347" },
+  { title: "燃氣(LNG)", color: "#006600" },
+  { title: "民營電廠-燃氣(IPP LNG)", color: "#5EDFDF" },
+  { title: "重油(Oil)", color: "#FF1919" },
+  { title: "輕油(Diesel)", color: "#848484" },
+  { title: "水力(Hydro)", color: "#0000B2" },
+  { title: "風力(Wind)", color: "#009933" },
+  { title: "太陽能(Solar)", color: "#00CC00" },
+  { title: "抽蓄發電(Pumping Gen)", color: "#3366CC" },
+  { title: "抽蓄負載(Pump Load)", color: "#6699FF" },
 ];
-const keys = Object.keys(FILL_COLOR_LIST);
-keys.shift();
+const keys = Object.keys([null /*time slot */].concat(Y_RANGE)).slice(1);
 
 const defaultMargin = { top: 40, right: 30, bottom: 50, left: 40 };
 
@@ -94,7 +147,8 @@ const getY1 = (d) => -d[1];
 function Graph({
   width,
   height,
-  data,
+  hoveringYIndex,
+  table,
   margin = defaultMargin,
   events = false,
 }) {
@@ -142,7 +196,7 @@ function Graph({
         />
         <AreaStack
           keys={keys}
-          data={data}
+          data={table}
           x={(d) => xScale(getX(d.data)) ?? 0}
           y0={(d) => yScale(getY0(d)) ?? 0}
           y1={(d) => yScale(getY1(d)) ?? 0}
@@ -153,8 +207,8 @@ function Graph({
                 key={`stack-${stack.key}`}
                 d={path(stack) || ""}
                 stroke="transparent"
-                fill={FILL_COLOR_LIST[stack.key]}
-                opacity={0.6}
+                fill={Y_RANGE[stack.index].color}
+                opacity={hoveringYIndex === stack.index ? 1 : undefined}
                 onClick={() => {
                   if (events) alert(`${stack.key}`);
                 }}
