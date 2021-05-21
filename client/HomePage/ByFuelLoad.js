@@ -34,7 +34,7 @@ export default function ByFuelLoad() {
       refreshInterval: 5 * 60 * 1000,
     }
   );
-  const [hoveringYIndex, setHoveringYIndex] = React.useState();
+  const [hoveringYIndex, setHoveringYIndex] = React.useState(-1);
   const onMouseEnter = React.useCallback(
     ({ currentTarget: { dataset } }) => {
       setHoveringYIndex(parseInt(dataset.index, 10));
@@ -42,7 +42,7 @@ export default function ByFuelLoad() {
     [setHoveringYIndex]
   );
   const onMouseLeave = React.useCallback(() => {
-    setHoveringYIndex(undefined);
+    setHoveringYIndex(-1);
   }, [setHoveringYIndex]);
   if (error) return <div>failed to load</div>;
   if (!response) {
@@ -61,7 +61,7 @@ export default function ByFuelLoad() {
           資料來源每十分鐘自動更新
         </Chakra.Text>
       </Chakra.Heading>
-      <Chakra.Stack direction={["column", , "row"]} spacing={2}>
+      <Chakra.Stack direction={["column", , "row"]} spacing={2} mt={4}>
         <Chakra.List
           order={[, , -1]}
           minWidth={[, , 36]}
@@ -84,7 +84,13 @@ export default function ByFuelLoad() {
               <Chakra.Circle
                 size={6}
                 transition="opacity 0.2s ease-in-out"
-                opacity={hoveringYIndex === index ? 1 : 0.6}
+                opacity={
+                  hoveringYIndex === -1
+                    ? 0.6
+                    : hoveringYIndex === index
+                    ? 1
+                    : 0.2
+                }
                 bgColor={color}
                 ml={4}
               />
@@ -214,7 +220,13 @@ function Graph({
                 d={path(stack) || ""}
                 stroke="transparent"
                 fill={Y_RANGE[stack.index].color}
-                opacity={hoveringYIndex === stack.index ? 1 : 0.6}
+                opacity={
+                  hoveringYIndex === -1
+                    ? 0.6
+                    : hoveringYIndex === stack.index
+                    ? 1
+                    : 0.2
+                }
                 data-index={stack.index}
                 onMouseEnter={onMouseEnterYIndex}
                 onMouseLeave={onMouseLeaveYIndex}
