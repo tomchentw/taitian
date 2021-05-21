@@ -140,9 +140,6 @@ function Graph({
           height={yMax}
           stroke={gridStroke}
         />
-        <text x={xMax - 40} y="-14" fontSize={14}>
-          單位：萬瓩
-        </text>
         <AreaStack
           keys={keys}
           data={data}
@@ -165,6 +162,9 @@ function Graph({
             ))
           }
         </AreaStack>
+        <text x={xMax - 40} y="-18" fontSize={14}>
+          單位：萬瓩
+        </text>
         <AxisRight
           left={xMax}
           scale={yScale}
@@ -177,7 +177,7 @@ function Graph({
             fill: tickStroke,
             fontSize: 11,
             textAnchor: "end",
-            dy: "0.33em",
+            dy: "-0.33em",
           })}
         />
         <AxisBottom
