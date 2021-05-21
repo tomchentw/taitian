@@ -7,7 +7,9 @@ import { Group } from "@visx/group";
 import { ParentSize } from "@visx/responsive";
 import { scaleLinear } from "@visx/scale";
 import { AreaStack } from "@visx/shape";
-import { dateTimeFullFormat } from "../format";
+import { toISODateForInput, dateTimeFullFormat } from "../format";
+
+const MIN_DATE = toISODateForInput(new Date(2021, 4, 20));
 
 function fetcher(...args) {
   return fetch(...args).then((r) => {
@@ -27,8 +29,18 @@ function fetcher(...args) {
 }
 
 export default function ByFuelLoad() {
+  const maxDate = toISODateForInput(new Date());
+  const [date, setDate] = React.useState(maxDate);
+  const onChange = React.useCallback(
+    ({ target: { value } }) => {
+      setDate(value);
+    },
+    [setDate]
+  );
   const { data: response, error } = useSWR(
-    `/data/raw/loadfueltype.csv`,
+    maxDate === date
+      ? `/data/raw/loadfueltype.csv`
+      : `/data/accumulated/${date.split("-").join("/")}/loadfueltype.csv`,
     fetcher,
     {
       refreshInterval: 5 * 60 * 1000,
@@ -61,6 +73,29 @@ export default function ByFuelLoad() {
           資料來源每十分鐘自動更新
         </Chakra.Text>
       </Chakra.Heading>
+      <Chakra.FormControl
+        id="date"
+        mt={4}
+        display="flex"
+        maxW={[, "450px"]}
+        direction={["column", "row"]}
+        alignItems="center"
+      >
+        <Chakra.FormLabel flexShrink="0" mb={[, 0]}>
+          選擇日期
+        </Chakra.FormLabel>
+        <Chakra.Input
+          flex="1 0"
+          type="date"
+          min={MIN_DATE}
+          max={maxDate}
+          value={date}
+          onChange={onChange}
+        />
+        <Chakra.FormHelperText pl={[, 2]}>
+          最早可選日期為：{MIN_DATE}
+        </Chakra.FormHelperText>
+      </Chakra.FormControl>
       <Chakra.Stack direction={["column", , "row"]} spacing={2} mt={4}>
         <Chakra.List
           order={[, , -1]}

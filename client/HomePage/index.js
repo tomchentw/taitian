@@ -16,7 +16,7 @@ export default function Home() {
         <Chakra.Tabs isLazy>
           <Chakra.TabList>
             <Chakra.Tab>今日電力資訊</Chakra.Tab>
-            <Chakra.Tab>今日用電曲線圖</Chakra.Tab>
+            <Chakra.Tab>用電曲線圖</Chakra.Tab>
           </Chakra.TabList>
           <Chakra.TabPanels>
             <Chakra.TabPanel>
