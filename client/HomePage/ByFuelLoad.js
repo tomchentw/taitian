@@ -9,37 +9,27 @@ import { scaleLinear } from "@visx/scale";
 import { AreaStack } from "@visx/shape";
 import { dateTimeFullFormat } from "../format";
 
-function fetcherText(...args) {
+function fetcher(...args) {
   return fetch(...args).then((r) => {
     return r.text().then((text) => ({
       lastModified: new Date(r.headers.get("last-modified")),
-      text,
+      table: text.split("\n").flatMap((csvRow) => {
+        const trimmedRow = csvRow.trim();
+        const sep = ",";
+        if (!trimmedRow || trimmedRow === sep) {
+          return [];
+        } else {
+          return [csvRow.split(sep)];
+        }
+      }),
     }));
   });
 }
 
 export default function ByFuelLoad() {
-  const {
-    data: { lastModified, text },
-    error,
-  } = useSWR(`/data/raw/loadfueltype.csv`, fetcherText, {
+  const { data, error } = useSWR(`/data/raw/loadfueltype.csv`, fetcher, {
     refreshInterval: 5 * 60 * 1000,
   });
-  const data = React.useMemo(() => {
-    if (!text) {
-      return undefined;
-    }
-    return text.split("\n").flatMap((csvRow) => {
-      const trimmedRow = csvRow.trim();
-      const sep = ",";
-      if (!trimmedRow || trimmedRow === sep) {
-        return [];
-      } else {
-        return [csvRow.split(sep)];
-      }
-    });
-  }, [text]);
-
   if (error) return <div>failed to load</div>;
   if (!data) {
     return (
@@ -51,7 +41,7 @@ export default function ByFuelLoad() {
   return (
     <React.Fragment>
       <Chakra.Heading as="h4" size="md" textAlign="right">
-        現時 {dateTimeFullFormat.format(lastModified)}
+        現時 {dateTimeFullFormat.format(data.lastModified)}
         <br />
         <Chakra.Text as="i" fontSize="sm">
           資料來源每十分鐘自動更新
@@ -59,7 +49,9 @@ export default function ByFuelLoad() {
       </Chakra.Heading>
       <ParentSize style={{ minHeight: 480 }}>
         {({ width, height }) =>
-          width > 10 && <Graph width={width} height={height} data={data} />
+          width > 10 && (
+            <Graph width={width} height={height} data={data.table} />
+          )
         }
       </ParentSize>
     </React.Fragment>
