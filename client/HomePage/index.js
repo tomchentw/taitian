@@ -1,6 +1,7 @@
 import * as Chakra from "@chakra-ui/react";
 import * as React from "react";
 import TodayData from "./TodayData";
+import ByFuelLoad from "./ByFuelLoad";
 
 export default function Home() {
   return (
@@ -15,10 +16,14 @@ export default function Home() {
         <Chakra.Tabs isLazy>
           <Chakra.TabList>
             <Chakra.Tab>今日電力資訊</Chakra.Tab>
+            <Chakra.Tab>今日用電曲線圖</Chakra.Tab>
           </Chakra.TabList>
           <Chakra.TabPanels>
             <Chakra.TabPanel>
               <TodayData />
+            </Chakra.TabPanel>
+            <Chakra.TabPanel>
+              <ByFuelLoad />
             </Chakra.TabPanel>
           </Chakra.TabPanels>
         </Chakra.Tabs>

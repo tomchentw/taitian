@@ -7,7 +7,9 @@ function fetcherJson(...args) {
 }
 
 export default function TodayData() {
-  const { data, error } = useSWR(`/data/raw/loadpara.json`, fetcherJson);
+  const { data, error } = useSWR(`/data/raw/loadpara.json`, fetcherJson, {
+    refreshInterval: 5 * 60 * 1000,
+  });
 
   if (error) return <div>failed to load</div>;
   if (!data) {
