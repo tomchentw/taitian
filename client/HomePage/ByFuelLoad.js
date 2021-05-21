@@ -81,7 +81,13 @@ export default function ByFuelLoad() {
               <Chakra.Text fontSize="sm" flex="1">
                 {title}
               </Chakra.Text>
-              <Chakra.Circle size={6} bgColor={color} ml={4} />
+              <Chakra.Circle
+                size={6}
+                transition="opacity 0.2s ease-in-out"
+                opacity={hoveringYIndex === index ? 1 : 0.6}
+                bgColor={color}
+                ml={4}
+              />
             </Chakra.ListItem>
           )).reverse()}
         </Chakra.List>
@@ -93,9 +99,6 @@ export default function ByFuelLoad() {
             "& svg path": {
               transition: "opacity 0.2s ease-in-out",
             },
-            "& svg path:not(:hover):not([opacity])": {
-              opacity: 0.6,
-            },
           }}
         >
           {({ width, height }) =>
@@ -104,6 +107,8 @@ export default function ByFuelLoad() {
                 width={width}
                 height={height}
                 hoveringYIndex={hoveringYIndex}
+                onMouseEnterYIndex={onMouseEnter}
+                onMouseLeaveYIndex={onMouseLeave}
                 table={response.table}
               />
             )
@@ -131,7 +136,7 @@ const Y_RANGE = [
 ];
 const keys = Object.keys([null /*time slot */].concat(Y_RANGE)).slice(1);
 
-const defaultMargin = { top: 40, right: 30, bottom: 50, left: 40 };
+const defaultMargin = { top: 40, right: 10, bottom: 50, left: 20 };
 
 const gridStroke = "#e0e0e0";
 const axisStroke = "#aaaaaa";
@@ -148,9 +153,10 @@ function Graph({
   width,
   height,
   hoveringYIndex,
+  onMouseEnterYIndex,
+  onMouseLeaveYIndex,
   table,
   margin = defaultMargin,
-  events = false,
 }) {
   // bounds
   const yMax = height - margin.top - margin.bottom;
@@ -208,15 +214,15 @@ function Graph({
                 d={path(stack) || ""}
                 stroke="transparent"
                 fill={Y_RANGE[stack.index].color}
-                opacity={hoveringYIndex === stack.index ? 1 : undefined}
-                onClick={() => {
-                  if (events) alert(`${stack.key}`);
-                }}
+                opacity={hoveringYIndex === stack.index ? 1 : 0.6}
+                data-index={stack.index}
+                onMouseEnter={onMouseEnterYIndex}
+                onMouseLeave={onMouseLeaveYIndex}
               />
             ))
           }
         </AreaStack>
-        <text x={xMax - 40} y="-18" fontSize={14}>
+        <text x={xMax - 60} y="-18" fontSize={14}>
           單位：萬瓩
         </text>
         <AxisRight
