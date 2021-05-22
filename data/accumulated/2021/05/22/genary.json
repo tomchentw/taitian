@@ -3578,6 +3578,1795 @@
           "note": ""
         }
       ]
+    },
+    {
+      "time": "21:20",
+      "generators": [
+        {
+          "type": "nuclear",
+          "name": "核二#1",
+          "capacity": "985.0",
+          "generation": "851.3",
+          "percentage": "86.426%",
+          "note": "燃料限制"
+        },
+        {
+          "type": "nuclear",
+          "name": "核二#2",
+          "capacity": "985.0",
+          "generation": "970.6",
+          "percentage": "98.538%",
+          "note": ""
+        },
+        {
+          "type": "nuclear",
+          "name": "核三#1",
+          "capacity": "951.0",
+          "generation": "940.4",
+          "percentage": "98.885%",
+          "note": ""
+        },
+        {
+          "type": "nuclear",
+          "name": "核三#2",
+          "capacity": "951.0",
+          "generation": "941.5",
+          "percentage": "99.001%",
+          "note": ""
+        },
+        {
+          "type": "nuclear",
+          "name": "小計",
+          "capacity": "3872.0(7.793%)",
+          "generation": "3703.8(11.677%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "林口#1",
+          "capacity": "800.0",
+          "generation": "757.9",
+          "percentage": "94.738%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "林口#2",
+          "capacity": "800.0",
+          "generation": "760.5",
+          "percentage": "95.062%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "林口#3",
+          "capacity": "800.0",
+          "generation": "747.9",
+          "percentage": "93.488%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "台中#1",
+          "capacity": "550.0",
+          "generation": "498.2",
+          "percentage": "90.582%",
+          "note": "運轉限制"
+        },
+        {
+          "type": "coal",
+          "name": "台中#2",
+          "capacity": "550.0",
+          "generation": "514.5",
+          "percentage": "93.545%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "台中#3",
+          "capacity": "550.0",
+          "generation": "506.1",
+          "percentage": "92.018%",
+          "note": "運轉限制"
+        },
+        {
+          "type": "coal",
+          "name": "台中#4",
+          "capacity": "550.0",
+          "generation": "509.4",
+          "percentage": "92.618%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "台中#5",
+          "capacity": "550.0",
+          "generation": "532.3",
+          "percentage": "96.782%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "台中#6",
+          "capacity": "550.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "環保停機檢修"
+        },
+        {
+          "type": "coal",
+          "name": "台中#7",
+          "capacity": "550.0",
+          "generation": "523.8",
+          "percentage": "95.236%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "台中#8",
+          "capacity": "550.0",
+          "generation": "529.0",
+          "percentage": "96.182%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "台中#9",
+          "capacity": "550.0",
+          "generation": "49.9",
+          "percentage": "9.073%",
+          "note": "測試運轉"
+        },
+        {
+          "type": "coal",
+          "name": "台中#10",
+          "capacity": "550.0",
+          "generation": "526.4",
+          "percentage": "95.709%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "興達#1(註12)",
+          "capacity": "500.0",
+          "generation": "323.9",
+          "percentage": "64.780%",
+          "note": "運轉限制"
+        },
+        {
+          "type": "coal",
+          "name": "興達#2(註12)",
+          "capacity": "500.0",
+          "generation": "471.4",
+          "percentage": "94.280%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "興達#3(註12)",
+          "capacity": "550.0",
+          "generation": "521.4",
+          "percentage": "94.800%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "興達#4(註12)",
+          "capacity": "550.0",
+          "generation": "527.1",
+          "percentage": "95.836%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "大林#1",
+          "capacity": "800.0",
+          "generation": "758.6",
+          "percentage": "94.825%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "大林#2",
+          "capacity": "800.0",
+          "generation": "761.8",
+          "percentage": "95.225%",
+          "note": ""
+        },
+        {
+          "type": "coal",
+          "name": "小計",
+          "capacity": "11600.0(23.347%)",
+          "generation": "9820.1(30.959%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "cogen",
+          "name": "汽電共生",
+          "capacity": "618.0",
+          "generation": "1052.4",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "cogen",
+          "name": "小計",
+          "capacity": "618.0(1.244%)",
+          "generation": "1052.4(3.318%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "ippcoal",
+          "name": "和平#1",
+          "capacity": "648.6",
+          "generation": "606.1",
+          "percentage": "93.455%",
+          "note": ""
+        },
+        {
+          "type": "ippcoal",
+          "name": "和平#2",
+          "capacity": "648.6",
+          "generation": "597.8",
+          "percentage": "92.175%",
+          "note": ""
+        },
+        {
+          "type": "ippcoal",
+          "name": "麥寮#1",
+          "capacity": "600.0",
+          "generation": "571.3",
+          "percentage": "95.217%",
+          "note": ""
+        },
+        {
+          "type": "ippcoal",
+          "name": "麥寮#2",
+          "capacity": "600.0",
+          "generation": "570.3",
+          "percentage": "95.050%",
+          "note": ""
+        },
+        {
+          "type": "ippcoal",
+          "name": "麥寮#3",
+          "capacity": "600.0",
+          "generation": "575.0",
+          "percentage": "95.833%",
+          "note": ""
+        },
+        {
+          "type": "ippcoal",
+          "name": "小計",
+          "capacity": "3097.1(6.234%)",
+          "generation": "2920.5(9.207%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "大潭CC#1",
+          "capacity": "742.7",
+          "generation": "670.0",
+          "percentage": "90.211%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "大潭CC#2",
+          "capacity": "742.7",
+          "generation": "627.3",
+          "percentage": "84.462%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "大潭CC#3",
+          "capacity": "724.7",
+          "generation": "597.6",
+          "percentage": "82.462%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "大潭CC#4",
+          "capacity": "724.7",
+          "generation": "683.7",
+          "percentage": "94.342%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "大潭CC#5",
+          "capacity": "724.7",
+          "generation": "642.4",
+          "percentage": "88.644%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "大潭CC#6",
+          "capacity": "724.7",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "歲修"
+        },
+        {
+          "type": "lng",
+          "name": "大潭CC#7",
+          "capacity": "600.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "部分檢修"
+        },
+        {
+          "type": "lng",
+          "name": "通霄CC#1",
+          "capacity": "892.6",
+          "generation": "887.8",
+          "percentage": "99.462%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "通霄CC#2",
+          "capacity": "892.6",
+          "generation": "876.2",
+          "percentage": "98.163%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "通霄CC#3",
+          "capacity": "892.6",
+          "generation": "874.6",
+          "percentage": "97.983%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "通霄CC#4",
+          "capacity": "386.0",
+          "generation": "320.4",
+          "percentage": "83.005%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "通霄CC#5",
+          "capacity": "386.0",
+          "generation": "320.7",
+          "percentage": "83.083%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "通霄CC#6",
+          "capacity": "321.2",
+          "generation": "350.3",
+          "percentage": "109.060%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "興達CC#1",
+          "capacity": "445.2",
+          "generation": "403.1",
+          "percentage": "90.546%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "興達CC#2",
+          "capacity": "445.2",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "歲修"
+        },
+        {
+          "type": "lng",
+          "name": "興達CC#3",
+          "capacity": "445.2",
+          "generation": "390.3",
+          "percentage": "87.670%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "興達CC#4",
+          "capacity": "445.2",
+          "generation": "393.4",
+          "percentage": "88.367%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "興達CC#5",
+          "capacity": "445.2",
+          "generation": "398.2",
+          "percentage": "89.445%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "南部CC#1",
+          "capacity": "288.8",
+          "generation": "279.0",
+          "percentage": "96.607%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "南部CC#2",
+          "capacity": "288.8",
+          "generation": "198.4",
+          "percentage": "68.698%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "南部CC#3",
+          "capacity": "288.8",
+          "generation": "227.3",
+          "percentage": "78.705%",
+          "note": ""
+        },
+        {
+          "type": "lng",
+          "name": "南部CC#4",
+          "capacity": "251.4",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "檢修"
+        },
+        {
+          "type": "lng",
+          "name": "大林#5",
+          "capacity": "500.0",
+          "generation": "451.8",
+          "percentage": "90.360%",
+          "note": "運轉限制"
+        },
+        {
+          "type": "lng",
+          "name": "大林#6",
+          "capacity": "550.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "歲修"
+        },
+        {
+          "type": "lng",
+          "name": "小計",
+          "capacity": "13149.0(26.465%)",
+          "generation": "9592.5(30.242%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "ipplng",
+          "name": "海湖#1",
+          "capacity": "450.0",
+          "generation": "413.3",
+          "percentage": "91.844%",
+          "note": ""
+        },
+        {
+          "type": "ipplng",
+          "name": "海湖#2",
+          "capacity": "450.0",
+          "generation": "405.8",
+          "percentage": "90.178%",
+          "note": ""
+        },
+        {
+          "type": "ipplng",
+          "name": "新桃#1",
+          "capacity": "600.0",
+          "generation": "598.0",
+          "percentage": "99.667%",
+          "note": ""
+        },
+        {
+          "type": "ipplng",
+          "name": "國光#1",
+          "capacity": "480.0",
+          "generation": "469.4",
+          "percentage": "97.792%",
+          "note": ""
+        },
+        {
+          "type": "ipplng",
+          "name": "星彰#1",
+          "capacity": "506.9",
+          "generation": "454.3",
+          "percentage": "89.631%",
+          "note": ""
+        },
+        {
+          "type": "ipplng",
+          "name": "星元#1",
+          "capacity": "490.0",
+          "generation": "257.8",
+          "percentage": "52.612%",
+          "note": "部分故障"
+        },
+        {
+          "type": "ipplng",
+          "name": "嘉惠#1",
+          "capacity": "670.0",
+          "generation": "147.7",
+          "percentage": "22.045%",
+          "note": "檢修"
+        },
+        {
+          "type": "ipplng",
+          "name": "嘉惠#2(註10)",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "ipplng",
+          "name": "豐德#1",
+          "capacity": "506.9",
+          "generation": "483.7",
+          "percentage": "95.432%",
+          "note": ""
+        },
+        {
+          "type": "ipplng",
+          "name": "豐德#2",
+          "capacity": "506.9",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "檢修"
+        },
+        {
+          "type": "ipplng",
+          "name": "小計",
+          "capacity": "4660.6(9.380%)",
+          "generation": "3230.0(10.183%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "oil",
+          "name": "協和#3",
+          "capacity": "500.0",
+          "generation": "134.1",
+          "percentage": "26.820%",
+          "note": "環保限制"
+        },
+        {
+          "type": "oil",
+          "name": "協和#4",
+          "capacity": "500.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "歲修"
+        },
+        {
+          "type": "oil",
+          "name": "小計",
+          "capacity": "1000.0(2.013%)",
+          "generation": "134.1(0.423%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "核二Gas1",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "核二Gas2",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "核三Gas1",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "核三Gas2",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "台中Gas1&amp;2",
+          "capacity": "140.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "台中Gas3&amp;4",
+          "capacity": "140.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "澎湖尖山(註4)",
+          "capacity": "129.8",
+          "generation": "74.7",
+          "percentage": "57.550%",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "金門塔山(註4)",
+          "capacity": "113.3",
+          "generation": "44.5",
+          "percentage": "39.279%",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "馬祖珠山(註4)",
+          "capacity": "28.6",
+          "generation": "8.0",
+          "percentage": "27.933%",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "離島其他(註4)",
+          "capacity": "42.7",
+          "generation": "N/A",
+          "percentage": "N/A",
+          "note": ""
+        },
+        {
+          "type": "diesel",
+          "name": "小計(註5)",
+          "capacity": "594.4(1.196%)",
+          "generation": "127.2(0.401%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "德基#1",
+          "capacity": "78.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "德基#2",
+          "capacity": "78.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "德基#3",
+          "capacity": "78.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "青山#1",
+          "capacity": "92.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "青山#2",
+          "capacity": "92.0",
+          "generation": "6.7",
+          "percentage": "7.283%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "青山#3",
+          "capacity": "92.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "青山#4",
+          "capacity": "92.0",
+          "generation": "6.7",
+          "percentage": "7.283%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "谷關#1",
+          "capacity": "54.4",
+          "generation": "15.7",
+          "percentage": "28.834%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "谷關#2",
+          "capacity": "54.4",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "谷關#3",
+          "capacity": "54.4",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "歲修"
+        },
+        {
+          "type": "hydro",
+          "name": "谷關#4",
+          "capacity": "54.4",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "天輪#1",
+          "capacity": "22.5",
+          "generation": "19.3",
+          "percentage": "85.778%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "天輪#2",
+          "capacity": "22.5",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "天輪#3",
+          "capacity": "22.5",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "歲修"
+        },
+        {
+          "type": "hydro",
+          "name": "天輪#4",
+          "capacity": "22.5",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "天輪#5",
+          "capacity": "105.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "馬鞍#1",
+          "capacity": "66.7",
+          "generation": "6.0",
+          "percentage": "8.990%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "馬鞍#2",
+          "capacity": "66.7",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "卓蘭#1",
+          "capacity": "40.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "卓蘭#2",
+          "capacity": "40.0",
+          "generation": "40.1",
+          "percentage": "100.250%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "萬大#1",
+          "capacity": "10.4",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "萬大#2",
+          "capacity": "10.4",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "萬大#3",
+          "capacity": "15.3",
+          "generation": "3.5",
+          "percentage": "22.876%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "萬大#4",
+          "capacity": "19.7",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "松林#1&amp;2",
+          "capacity": "20.9",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "大觀一#1",
+          "capacity": "22.0",
+          "generation": "8.2",
+          "percentage": "37.273%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "大觀一#2",
+          "capacity": "22.0",
+          "generation": "8.5",
+          "percentage": "38.636%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "大觀一#3",
+          "capacity": "22.0",
+          "generation": "8.5",
+          "percentage": "38.636%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "大觀一#4",
+          "capacity": "22.0",
+          "generation": "8.2",
+          "percentage": "37.273%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "大觀一#5",
+          "capacity": "22.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "檢修"
+        },
+        {
+          "type": "hydro",
+          "name": "鉅工#1",
+          "capacity": "21.8",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "歲修"
+        },
+        {
+          "type": "hydro",
+          "name": "鉅工#2",
+          "capacity": "21.8",
+          "generation": "13.0",
+          "percentage": "59.770%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "水里#1",
+          "capacity": "12.8",
+          "generation": "0.0",
+          "percentage": "0.002%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "立霧#1&amp;#2",
+          "capacity": "32.0",
+          "generation": "7.0",
+          "percentage": "21.875%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "龍澗#1",
+          "capacity": "48.6",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "龍澗#2",
+          "capacity": "48.6",
+          "generation": "10.5",
+          "percentage": "21.605%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "碧海",
+          "capacity": "61.2",
+          "generation": "5.3",
+          "percentage": "8.660%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "烏來&amp;桂山&amp;粗坑",
+          "capacity": "40.5",
+          "generation": "9.1",
+          "percentage": "22.469%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "北部小水力(註6)",
+          "capacity": "26.6",
+          "generation": "N/A",
+          "percentage": "N/A",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "中部小水力(註6)",
+          "capacity": "9.8",
+          "generation": "N/A",
+          "percentage": "N/A",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "南部小水力(註6)",
+          "capacity": "7.2",
+          "generation": "N/A",
+          "percentage": "N/A",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "東部小水力(註6)",
+          "capacity": "54.6",
+          "generation": "16.0",
+          "percentage": "29.304%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "翡翠#1",
+          "capacity": "70.0",
+          "generation": "70.4",
+          "percentage": "100.571%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "石門#1",
+          "capacity": "45.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "石門#2",
+          "capacity": "45.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "曾文#1",
+          "capacity": "50.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "義興#1",
+          "capacity": "40.0",
+          "generation": "12.0",
+          "percentage": "30.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "名間",
+          "capacity": "16.7",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "嘉南西口、烏山頭和八田",
+          "capacity": "22.5",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "后里示範",
+          "capacity": "0.1",
+          "generation": "N/A",
+          "percentage": "N/A",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "卑南",
+          "capacity": "2.0",
+          "generation": "0.6",
+          "percentage": "30.303%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "捷祥關山",
+          "capacity": "1.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "hydro",
+          "name": "小計",
+          "capacity": "2092.5(4.212%)",
+          "generation": "281.3(0.887%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "石門",
+          "capacity": "4.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "林口",
+          "capacity": "6.0",
+          "generation": "0.2",
+          "percentage": "3.333%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "蘆竹",
+          "capacity": "7.2",
+          "generation": "0.2",
+          "percentage": "2.778%",
+          "note": "檢修"
+        },
+        {
+          "type": "wind",
+          "name": "大潭",
+          "capacity": "15.1",
+          "generation": "1.0",
+          "percentage": "6.623%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "觀園",
+          "capacity": "30.0",
+          "generation": "1.9",
+          "percentage": "6.333%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "香山",
+          "capacity": "12.0",
+          "generation": "0.5",
+          "percentage": "4.167%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "台中",
+          "capacity": "6.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "台中港",
+          "capacity": "36.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "王功",
+          "capacity": "23.0",
+          "generation": "0.2",
+          "percentage": "0.870%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "彰工",
+          "capacity": "71.2",
+          "generation": "0.1",
+          "percentage": "0.140%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "永興",
+          "capacity": "9.2",
+          "generation": "0.1",
+          "percentage": "1.087%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "離岸一期(註10)",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "雲麥",
+          "capacity": "46.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "四湖",
+          "capacity": "28.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "恆春",
+          "capacity": "4.5",
+          "generation": "0.6",
+          "percentage": "13.333%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "澎湖中屯",
+          "capacity": "4.8",
+          "generation": "0.2",
+          "percentage": "4.771%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "金門金沙",
+          "capacity": "4.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": "通訊中斷"
+        },
+        {
+          "type": "wind",
+          "name": "澎湖湖西",
+          "capacity": "5.4",
+          "generation": "0.1",
+          "percentage": "0.926%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "苗栗竹南",
+          "capacity": "7.8",
+          "generation": "0.6",
+          "percentage": "7.692%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "苗栗大鵬",
+          "capacity": "42.0",
+          "generation": "0.6",
+          "percentage": "1.429%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "鹿威彰濱",
+          "capacity": "55.2",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "鹿威鹿港",
+          "capacity": "41.4",
+          "generation": "0.6",
+          "percentage": "1.449%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "觀威觀音&amp;桃威新屋",
+          "capacity": "48.3",
+          "generation": "2.9",
+          "percentage": "6.004%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "中威大安",
+          "capacity": "75.9",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "崎威崎頂",
+          "capacity": "6.9",
+          "generation": "0.3",
+          "percentage": "4.348%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "豐威",
+          "capacity": "11.5",
+          "generation": "1.1",
+          "percentage": "9.565%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "龍威後龍",
+          "capacity": "44.1",
+          "generation": "1.0",
+          "percentage": "2.268%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "苗栗通苑",
+          "capacity": "39.1",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "安威",
+          "capacity": "11.5",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "清風清水",
+          "capacity": "2.3",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "東鋼龍港",
+          "capacity": "11.5",
+          "generation": "0.1",
+          "percentage": "0.730%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "海洋竹南",
+          "capacity": "128.0",
+          "generation": "5.9",
+          "percentage": "4.609%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "禾風麥寮",
+          "capacity": "2.3",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "wind",
+          "name": "小計",
+          "capacity": "840.2(1.691%)",
+          "generation": "18.2(0.057%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "金門金沙",
+          "capacity": "0.5",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "台中生水池",
+          "capacity": "2.1",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "興達生水池",
+          "capacity": "1.6",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "嘉義民雄",
+          "capacity": "0.1",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "中部儲運",
+          "capacity": "0.1",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "東勢新伯公",
+          "capacity": "0.1",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "永安鹽灘地",
+          "capacity": "4.6",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "路北",
+          "capacity": "0.1",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "中原大學",
+          "capacity": "0.0",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "大潭生水池",
+          "capacity": "0.6",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "核三生水池",
+          "capacity": "1.5",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "七美",
+          "capacity": "0.4",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "尖山",
+          "capacity": "0.1",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "卓蘭",
+          "capacity": "0.0",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "后里",
+          "capacity": "0.1",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "台中龍井",
+          "capacity": "6.5",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "七股",
+          "capacity": "1.8",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": "資料維修中"
+        },
+        {
+          "type": "solar",
+          "name": "龍潭E/S",
+          "capacity": "0.2",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "竹工E/S",
+          "capacity": "0.2",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "中科E/S",
+          "capacity": "0.2",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "彰林E/S",
+          "capacity": "0.3",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "高雄E/S",
+          "capacity": "0.4",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": "資料維修中"
+        },
+        {
+          "type": "solar",
+          "name": "燕巢倉庫",
+          "capacity": "0.5",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "大潭",
+          "capacity": "0.7",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "北儲",
+          "capacity": "0.9",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "彰濱光",
+          "capacity": "100.0",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "南鹽光(註10)",
+          "capacity": "-",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "崙尾光(註10)",
+          "capacity": "-",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "太陽能購電(註7)",
+          "capacity": "5435.2",
+          "generation": "0.000",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "solar",
+          "name": "小計",
+          "capacity": "5558.8(11.188%)",
+          "generation": "0.0(0.000%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "大觀二#1",
+          "capacity": "250.0",
+          "generation": "154.4",
+          "percentage": "61.760%",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "大觀二#2",
+          "capacity": "250.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "大觀二#3",
+          "capacity": "250.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "大觀二#4",
+          "capacity": "250.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "明潭#1",
+          "capacity": "267.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "明潭#2",
+          "capacity": "267.0",
+          "generation": "163.8",
+          "percentage": "61.348%",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "明潭#3",
+          "capacity": "267.0",
+          "generation": "193.4",
+          "percentage": "72.434%",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "明潭#4",
+          "capacity": "267.0",
+          "generation": "163.8",
+          "percentage": "61.348%",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "明潭#5",
+          "capacity": "267.0",
+          "generation": "0.0",
+          "percentage": "0.000%",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "明潭#6",
+          "capacity": "267.0",
+          "generation": "163.8",
+          "percentage": "61.348%",
+          "note": ""
+        },
+        {
+          "type": "pumpinggen",
+          "name": "小計",
+          "capacity": "2602.0(5.237%)",
+          "generation": "839.2(2.646%)",
+          "percentage": "",
+          "note": ""
+        },
+        {
+          "type": "pumpingload",
+          "name": "大觀二#1",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "pumpingload",
+          "name": "大觀二#2",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "pumpingload",
+          "name": "大觀二#3",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "pumpingload",
+          "name": "大觀二#4",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "pumpingload",
+          "name": "明潭#1",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "pumpingload",
+          "name": "明潭#2",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "pumpingload",
+          "name": "明潭#3",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "pumpingload",
+          "name": "明潭#4",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "pumpingload",
+          "name": "明潭#5",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "pumpingload",
+          "name": "明潭#6",
+          "capacity": "-",
+          "generation": "0.0",
+          "percentage": "-",
+          "note": ""
+        },
+        {
+          "type": "geothermal",
+          "name": "小型地熱能",
+          "capacity": "0.3",
+          "generation": "0.2",
+          "percentage": "66.667%",
+          "note": ""
+        },
+        {
+          "type": "geothermal",
+          "name": "小計",
+          "capacity": "0.3(0.001%)",
+          "generation": "0.2(0.001%)",
+          "percentage": "",
+          "note": ""
+        }
+      ]
     }
   ]
 }
