@@ -2,6 +2,11 @@ import ChakraDefaultTheme from "@chakra-ui/theme";
 import * as Chakra from "@chakra-ui/react";
 import Head from "next/head";
 import * as React from "react";
+import useSWR from "swr";
+
+function fetcherText(...args) {
+  return fetch(...args).then((r) => r.text());
+}
 
 const theme = Chakra.extendTheme({
   fonts: {
@@ -11,6 +16,17 @@ const theme = Chakra.extendTheme({
 });
 
 export default function TaitianApp({ Component, pageProps }) {
+  const { data: buildId, error } = useSWR(`/BUILD_ID`, fetcherText, {
+    refreshInterval: 1 * 60 * 60 * 1000, // Hourly
+  });
+  const prevBuildIdRef = React.useRef(buildId);
+  const [newVersionAvailable, setNewVersionAvailable] = React.useState(false);
+  React.useEffect(() => {
+    if (buildId !== prevBuildIdRef.current && prevBuildIdRef.current) {
+      setNewVersionAvailable(true);
+    }
+    prevBuildIdRef.current = buildId;
+  }, [buildId, prevBuildIdRef]);
   return (
     <React.Fragment>
       <Head>
@@ -24,6 +40,20 @@ export default function TaitianApp({ Component, pageProps }) {
         />
       </Head>
       <Chakra.ChakraProvider theme={theme}>
+        <Chakra.Collapse in={newVersionAvailable} animateOpacity>
+          <Chakra.Box as="header" borderBottomWidth="2px" p={4}>
+            <Chakra.Container maxW="container.xl" as={Chakra.HStack}>
+              <Chakra.Text>發現新版本！</Chakra.Text>
+              <Chakra.Button
+                colorScheme="teal"
+                size="sm"
+                onClick={() => location.reload()}
+              >
+                重新整理
+              </Chakra.Button>
+            </Chakra.Container>
+          </Chakra.Box>
+        </Chakra.Collapse>
         <Component {...pageProps} />
       </Chakra.ChakraProvider>
     </React.Fragment>
