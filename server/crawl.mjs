@@ -11,12 +11,20 @@ const RAW_DIR = path.join(DIRNAME, `../public/data/raw`);
 const INTERVAL = 60 * 1000; // 1 minute
 const URL_LIST = [
   {
+    pathname: `genary.json`,
+    url: `https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/genary.json`,
+  },
+  {
     pathname: `loadpara.json`,
     url: `https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/loadpara.json`,
   },
   {
     pathname: `loadfueltype.csv`,
     url: `https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/loadfueltype.csv`,
+  },
+  {
+    pathname: `loadareas.csv`,
+    url: `https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/loadareas.csv`,
   },
 ];
 
