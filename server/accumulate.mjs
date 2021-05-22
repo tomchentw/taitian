@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import * as _ from "lodash-es";
-import fetch from "node-fetch";
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url));
 const RAW_DIR = path.join(DIRNAME, `../public/data/raw`);
@@ -15,7 +14,19 @@ const taipeiFormat = new Intl.DateTimeFormat("en", {
   timeZone: "Asia/Taipei",
 });
 
-async function loadfueltype() {
+async function loadfueltype(accumulatedDirPath) {
+  const sourceFilePath = path.join(RAW_DIR, "loadfueltype.csv");
+  const accumulatedFilePath = path.join(accumulatedDirPath, "loadfueltype.csv");
+  await fs.promises.copyFile(sourceFilePath, accumulatedFilePath);
+}
+
+async function loadareas(accumulatedDirPath) {
+  const sourceFilePath = path.join(RAW_DIR, "loadareas.csv");
+  const accumulatedFilePath = path.join(accumulatedDirPath, "loadareas.csv");
+  await fs.promises.copyFile(sourceFilePath, accumulatedFilePath);
+}
+
+export default async function accumulate() {
   const now = new Date();
   const closeToMindnight = new Date(
     now.getFullYear(),
@@ -29,13 +40,10 @@ async function loadfueltype() {
   }
   const [{ value: month }, , { value: day }, , { value: year }] =
     taipeiFormat.formatToParts(closeToMindnight);
-  const sourceFilePath = path.join(RAW_DIR, "loadfueltype.csv");
   const accumulatedDirPath = path.join(ACCUMULATED_DIR, year, month, day);
   await fs.promises.mkdir(accumulatedDirPath, { recursive: true });
-  const accumulatedFilePath = path.join(accumulatedDirPath, "loadfueltype.csv");
-  await fs.promises.copyFile(sourceFilePath, accumulatedFilePath);
-}
-
-export default async function accumulate() {
-  await Promise.all([loadfueltype()]);
+  await Promise.all([
+    loadfueltype(accumulatedDirPath),
+    loadareas(accumulatedDirPath),
+  ]);
 }
