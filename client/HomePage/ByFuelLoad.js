@@ -8,6 +8,7 @@ import { ParentSize } from "@visx/responsive";
 import { scaleLinear } from "@visx/scale";
 import { AreaStack } from "@visx/shape";
 import { toISODateForInput, dateTimeFullFormat } from "../format";
+import Loading from "./Loading";
 
 const MIN_DATE = toISODateForInput(new Date(2021, 4, 20));
 
@@ -64,11 +65,7 @@ export default function ByFuelLoad() {
   }, [setHoveringYIndex]);
   if (error) return <div>failed to load</div>;
   if (!response) {
-    return (
-      <Chakra.Center p={20}>
-        <Chakra.Spinner size="xl" />
-      </Chakra.Center>
-    );
+    return <Loading />;
   }
   return (
     <React.Fragment>

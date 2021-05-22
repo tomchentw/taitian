@@ -1,7 +1,12 @@
 import * as Chakra from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import * as React from "react";
+import Loading from "./Loading";
 import TodayData from "./TodayData";
-import ByFuelLoad from "./ByFuelLoad";
+
+const ByFuelLoad = dynamic(() => import("./ByFuelLoad"), {
+  loading: () => <Loading />,
+});
 
 export default function Home() {
   return (

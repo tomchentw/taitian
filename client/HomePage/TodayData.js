@@ -1,6 +1,7 @@
 import * as Chakra from "@chakra-ui/react";
 import * as React from "react";
 import useSWR from "swr";
+import Loading from "./Loading";
 
 function fetcherJson(...args) {
   return fetch(...args).then((r) => r.json());
@@ -13,11 +14,7 @@ export default function TodayData() {
 
   if (error) return <div>failed to load</div>;
   if (!data) {
-    return (
-      <Chakra.Center p={20}>
-        <Chakra.Spinner size="xl" />
-      </Chakra.Center>
-    );
+    return <Loading />;
   }
   const {
     records: [
