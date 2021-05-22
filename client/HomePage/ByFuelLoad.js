@@ -33,7 +33,13 @@ export default function ByFuelLoad() {
   const [date, setDate] = React.useState(maxDate);
   const onChange = React.useCallback(
     ({ target: { value } }) => {
-      setDate(value);
+      if (MIN_DATE <= value && value <= maxDate) {
+        /**
+         * For some browser (ex. Mobile Firefox), the <input type="date" /> does
+         * not honor min and max attributes.
+         */
+        setDate(value);
+      }
     },
     [setDate]
   );
