@@ -153,12 +153,7 @@ function VXContexualGraph({ table }) {
             >
               <Chakra.Text fontSize="sm" flex="1">
                 {title}
-                <TooltipLoadInfo
-                  hoveringYIndex={hoveringYIndex}
-                  title={title}
-                  color={color}
-                  index={index}
-                />
+                <TooltipLoadInfo index={index} />
               </Chakra.Text>
               <Chakra.Circle
                 size={6}
@@ -210,10 +205,10 @@ function TooltipLoadInfo({ index }) {
   const tooltipContext = React.useContext(TooltipContext);
   const nearestDatum = getNearestDatumFrom(tooltipContext);
   return (
-    `${index}` === nearestDatum?.key && (
+    `${index + 1}` === nearestDatum?.key && (
       <>
         <br />
-        {nearestDatum.datum[index]}
+        {nearestDatum.datum[index + 1]}
       </>
     )
   );
