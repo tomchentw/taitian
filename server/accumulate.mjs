@@ -73,7 +73,7 @@ async function genaryToCSV(accumulatedDirPath) {
         headerRow
       );
   }
-  await fs.promises.appendFile(accumulatedFilePath, appendedCSV);
+  await fs.promises.writeFile(accumulatedFilePath, appendedCSV);
 }
 
 async function loadfueltype(accumulatedDirPath) {
