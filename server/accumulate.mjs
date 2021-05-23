@@ -19,84 +19,60 @@ function parseJson(string) {
   return JSON.parse(string);
 }
 
-async function genary(accumulatedDirPath) {
-  const sourceFilePath = path.join(RAW_DIR, "genary.json");
-  const accumulatedFilePath = path.join(accumulatedDirPath, "genary.json");
-  const [{ "": datetime, aaData }, accumulated] = await Promise.all([
-    fs.promises.readFile(sourceFilePath, "utf-8").then(parseJson),
-    fs.promises
-      .readFile(accumulatedFilePath, "utf-8")
-      .then(parseJson, (error) => {
-        if ("ENOENT" !== error.code) {
-          throw error;
-        }
-        return {
-          date: "",
-          data: [],
-        };
-      }),
-  ]);
-  const [date, time] = datetime.split(" ");
-  if (!accumulated.date) {
-    accumulated.date = date;
-  }
-  if (accumulated.date !== date) {
-    // Don't do anything
-    logger.error("[accumulate#genary] date mismatch!", accumulated.date, date);
-    return;
-  }
-  const entry = {
-    time,
-    generators: aaData.map(
-      ([htmlType, name, capacity, generation, percentage, rawNote]) => {
-        const [_, type] = htmlType.match(/^<A NAME='(\S+)'>.+$/);
-        const note = rawNote.trim();
-        return { type, name, capacity, generation, percentage, note };
-      }
-    ),
-  };
-  if (_.isEqual(_.last(accumulated.data), entry)) {
-    return;
-  }
-  accumulated.data.push(entry);
-  await fs.promises.writeFile(
-    accumulatedFilePath,
-    JSON.stringify(accumulated, null, 2)
-  );
+function splitNewLine(string) {
+  return string.split("\n");
 }
 
 async function genaryToCSV(accumulatedDirPath) {
   const sourceFilePath = path.join(RAW_DIR, "genary.json");
-  const accumulatedFilePath = path.join(accumulatedDirPath, "genary.csv");
+  const accumulatedFilePath = path.join(accumulatedDirPath, "genary_col.csv");
   const [{ "": datetime, aaData }, accumulatedCSV] = await Promise.all([
     fs.promises.readFile(sourceFilePath, "utf-8").then(parseJson),
-    fs.promises.readFile(accumulatedFilePath, "utf-8").catch((error) => {
-      if ("ENOENT" !== error.code) {
-        throw error;
-      }
-      return "time,type,name,capacity,generation,percentage,note\n";
-    }),
+    fs.promises
+      .readFile(accumulatedFilePath, "utf-8")
+      .then(splitNewLine, (error) => {
+        if ("ENOENT" !== error.code) {
+          throw error;
+        }
+        return [`type,name,capacity\n`];
+      }),
   ]);
   const [date, time] = datetime.split(" ");
-  function transformToEntry([
-    htmlType,
-    name,
-    capacity,
-    generation,
-    percentage,
-    rawNote,
-  ]) {
-    const [_, type] = htmlType.match(/^<A NAME='(\S+)'>.+$/);
-    const note = rawNote.trim();
-    return [time, type, name, capacity, generation, percentage, note];
-  }
-  const lastEntry = transformToEntry(_.last(aaData));
-  if (_.isEqual(_.last(accumulatedCSV.split("\n")), lastEntry)) {
+  let headerRow = _.head(accumulatedCSV);
+  if (headerRow.includes(`time-${time}`)) {
     return;
   }
-  const appendedCSV = aaData
-    .map(transformToEntry)
-    .reduce((acc, it) => `${acc}${it.join(",")}\n`, "");
+  headerRow = `${accumulatedCSV[0].trim()},time-${time},generation-${time},note-${time}\n`;
+  let appendedCSV;
+  if (1 === accumulatedCSV.length) {
+    appendedCSV = aaData
+      .map(
+        ([
+          htmlType,
+          name,
+          capacity,
+          generation,
+          ,
+          /* percentage */ rawNote,
+        ]) => {
+          const [_, type] = htmlType.match(/^<A NAME='(\S+)'>.+$/);
+          const note = rawNote.trim();
+          return [type, name, capacity, time, generation, note];
+        }
+      )
+      .reduce((acc, it) => `${acc}${it.join(",")}\n`, headerRow);
+  } else {
+    appendedCSV = aaData
+      .map(([, , , generation, , rawNote]) => {
+        const note = rawNote.trim();
+        return [time, generation, note];
+      })
+      .reduce(
+        (acc, it, index) =>
+          `${acc}${accumulatedCSV[index + 1].trim()},${it.join(",")}\n`,
+        headerRow
+      );
+  }
   await fs.promises.appendFile(accumulatedFilePath, appendedCSV);
 }
 
