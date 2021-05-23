@@ -1,12 +1,17 @@
 import * as Chakra from "@chakra-ui/react";
 import * as React from "react";
 import useSWR from "swr";
-import { AxisBottom, AxisRight } from "@visx/axis";
-import { GridRows, GridColumns } from "@visx/grid";
-import { Group } from "@visx/group";
-import { ParentSize } from "@visx/responsive";
-import { scaleLinear } from "@visx/scale";
-import { AreaStack } from "@visx/shape";
+import {
+  Axis,
+  Grid,
+  AreaStack,
+  AreaSeries,
+  XYChart,
+  Tooltip,
+  TooltipContext,
+  TooltipProvider,
+} from "@visx/xychart";
+import { curveLinear } from "@visx/curve";
 import { toISODateForInput, dateTimeFullFormat } from "../format";
 import Loading from "./Loading";
 
@@ -53,16 +58,6 @@ export default function ByFuelLoad() {
       refreshInterval: 5 * 60 * 1000,
     }
   );
-  const [hoveringYIndex, setHoveringYIndex] = React.useState(-1);
-  const onMouseEnter = React.useCallback(
-    ({ currentTarget: { dataset } }) => {
-      setHoveringYIndex(parseInt(dataset.index, 10));
-    },
-    [setHoveringYIndex]
-  );
-  const onMouseLeave = React.useCallback(() => {
-    setHoveringYIndex(-1);
-  }, [setHoveringYIndex]);
   if (error) return <div>failed to load</div>;
   if (!response) {
     return <Loading />;
@@ -79,10 +74,10 @@ export default function ByFuelLoad() {
       <Chakra.FormControl
         id="date"
         mt={4}
-        display="flex"
         maxW={[, "450px"]}
-        direction={["column", "row"]}
-        alignItems="center"
+        as={Chakra.Stack}
+        direction={["column", , "row"]}
+        alignItems={[, , "center"]}
       >
         <Chakra.FormLabel flexShrink="0" mb={[, 0]}>
           選擇日期
@@ -99,6 +94,25 @@ export default function ByFuelLoad() {
           最早可選日期為：{MIN_DATE}
         </Chakra.FormHelperText>
       </Chakra.FormControl>
+      <VXContexualGraph table={response.table} />
+    </React.Fragment>
+  );
+}
+
+function VXContexualGraph({ table }) {
+  const [hoveringYIndex, setHoveringYIndex] = React.useState(-1);
+  const onMouseEnter = React.useCallback(
+    ({ currentTarget: { dataset } }) => {
+      setHoveringYIndex(parseInt(dataset.index, 10));
+    },
+    [setHoveringYIndex]
+  );
+  const onMouseLeave = React.useCallback(() => {
+    setHoveringYIndex(-1);
+  }, [setHoveringYIndex]);
+
+  return (
+    <TooltipProvider>
       <Chakra.Stack direction={["column", , "row"]} spacing={2} mt={4}>
         <Chakra.List
           order={[, , -1]}
@@ -118,6 +132,12 @@ export default function ByFuelLoad() {
             >
               <Chakra.Text fontSize="sm" flex="1">
                 {title}
+                <TooltipLoadInfo
+                  hoveringYIndex={hoveringYIndex}
+                  title={title}
+                  color={color}
+                  index={index}
+                />
               </Chakra.Text>
               <Chakra.Circle
                 size={6}
@@ -136,7 +156,7 @@ export default function ByFuelLoad() {
           )).reverse()}
         </Chakra.List>
         <Chakra.Box
-          as={ParentSize}
+          width="100%"
           minHeight={600}
           order={0}
           sx={{
@@ -145,21 +165,36 @@ export default function ByFuelLoad() {
             },
           }}
         >
-          {({ width, height }) =>
-            width > 10 && (
-              <Graph
-                width={width}
-                height={height}
-                hoveringYIndex={hoveringYIndex}
-                onMouseEnterYIndex={onMouseEnter}
-                onMouseLeaveYIndex={onMouseLeave}
-                table={response.table}
-              />
-            )
-          }
+          <Graph hoveringYIndex={hoveringYIndex} table={table} />
         </Chakra.Box>
       </Chakra.Stack>
-    </React.Fragment>
+    </TooltipProvider>
+  );
+}
+
+function getNearestDatumFrom(tooltipContext) {
+  if (!tooltipContext.tooltipOpen) {
+    return false;
+  }
+  const {
+    tooltipData: { nearestDatum },
+  } = tooltipContext;
+  if (nearestDatum.distance > 5) {
+    return false;
+  }
+  return nearestDatum;
+}
+
+function TooltipLoadInfo({ index }) {
+  const tooltipContext = React.useContext(TooltipContext);
+  const nearestDatum = getNearestDatumFrom(tooltipContext);
+  return (
+    `${index}` === nearestDatum?.key && (
+      <>
+        <br />
+        {nearestDatum.datum[index]}
+      </>
+    )
   );
 }
 
@@ -180,7 +215,7 @@ const Y_RANGE = [
 ];
 const keys = Object.keys([null /*time slot */].concat(Y_RANGE)).slice(1);
 
-const defaultMargin = { top: 40, right: 10, bottom: 50, left: 20 };
+const defaultMargin = { top: 40, right: 50, bottom: 50, left: 20 };
 
 const gridStroke = "#e0e0e0";
 const axisStroke = "#aaaaaa";
@@ -190,124 +225,68 @@ const getX = (d) => {
   const [_, h, m] = d[0].match(/^(\d{2})\:(\d{2})$/);
   return parseInt(h, 10) * 60 + parseInt(m, 10);
 };
-const getY0 = (d) => -d[0];
-const getY1 = (d) => -d[1];
+const getYByKey = (key) => (d) => d[key];
 
-function Graph({
-  width,
-  height,
-  hoveringYIndex,
-  onMouseEnterYIndex,
-  onMouseLeaveYIndex,
-  table,
-  margin = defaultMargin,
-}) {
-  // bounds
-  const yMax = height - margin.top - margin.bottom;
-  const xMax = width - margin.left - margin.right;
+const xTickValues = Array(8)
+  .fill(0)
+  .map((_, index) => index * 3 * 60);
 
-  // scales
-  const xScale = scaleLinear({
-    range: [0, xMax],
-    domain: [0, 24 * 60],
-  });
-  const yScale = scaleLinear({
-    range: [yMax, 0],
-    domain: [0, -4000],
-  });
-  // ticks
-  const xTickValues = Array(8)
-    .fill(0)
-    .map((_, index) => index * 3 * 60);
-
+function Graph({ hoveringYIndex, table }) {
   return (
-    <svg width={width} height={height}>
-      <rect
-        x={0}
-        y={0}
-        width={width}
-        height={height}
-        fill="transparent"
-        rx={14}
+    <XYChart
+      xScale={{ type: "linear", domain: [0, 24 * 60] }}
+      yScale={{ type: "linear", domain: [0, 4000] }}
+      theme={{
+        gridStyles: {
+          stroke: gridStroke,
+        },
+      }}
+      margin={defaultMargin}
+    >
+      <Grid rows={true} columns={false} />
+      <Grid rows={false} tickValues={xTickValues} columns={true} />
+      <AreaStack curve={curveLinear} renderLine={false}>
+        {keys.map((key, index) => (
+          <AreaSeries
+            key={key}
+            dataKey={key}
+            data={table}
+            xAccessor={getX}
+            yAccessor={getYByKey(key)}
+            fill={Y_RANGE[index].color}
+            fillOpacity={
+              hoveringYIndex === -1 ? 0.6 : hoveringYIndex === index ? 1 : 0.2
+            }
+          />
+        ))}
+      </AreaStack>
+      <Axis
+        orientation="right"
+        label="單位：萬瓩"
+        axisLabel={{ fontSize: 14, dx: "0.3em" }}
       />
-      <Group top={margin.top} left={margin.left}>
-        <GridRows
-          scale={yScale}
-          width={xMax}
-          height={yMax}
-          stroke={gridStroke}
-        />
-        <GridColumns
-          scale={xScale}
-          tickValues={xTickValues}
-          width={xMax}
-          height={yMax}
-          stroke={gridStroke}
-        />
-        <AreaStack
-          keys={keys}
-          data={table}
-          x={(d) => xScale(getX(d.data)) ?? 0}
-          y0={(d) => yScale(getY0(d)) ?? 0}
-          y1={(d) => yScale(getY1(d)) ?? 0}
-        >
-          {({ stacks, path }) =>
-            stacks.map((stack) => (
-              <path
-                key={`stack-${stack.key}`}
-                d={path(stack) || ""}
-                stroke="transparent"
-                fill={Y_RANGE[stack.index].color}
-                opacity={
-                  hoveringYIndex === -1
-                    ? 0.6
-                    : hoveringYIndex === stack.index
-                    ? 1
-                    : 0.2
-                }
-                data-index={stack.index}
-                onMouseEnter={onMouseEnterYIndex}
-                onMouseLeave={onMouseLeaveYIndex}
-              />
-            ))
+      <Axis
+        orientation="bottom"
+        tickValues={xTickValues}
+        tickFormat={(x) => {
+          const hour = `${Math.floor(x / 60)}`;
+          const minute = `${x % 60}`;
+          return `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
+        }}
+      />
+      <Tooltip
+        showHorizontalCrosshair={false}
+        showVerticalCrosshair={true}
+        snapTooltipToDatumX={true}
+        snapTooltipToDatumY={true}
+        renderTooltip={(tooltipContext) => {
+          const nearestDatum = getNearestDatumFrom(tooltipContext);
+          if (!nearestDatum) {
+            return false;
           }
-        </AreaStack>
-        <text x={xMax - 60} y="-18" fontSize={14}>
-          單位：萬瓩
-        </text>
-        <AxisRight
-          left={xMax}
-          scale={yScale}
-          stroke={axisStroke}
-          tickStroke={tickStroke}
-          tickFormat={(y) => {
-            return -1 * y;
-          }}
-          tickLabelProps={() => ({
-            fill: tickStroke,
-            fontSize: 11,
-            textAnchor: "end",
-            dy: "-0.33em",
-          })}
-        />
-        <AxisBottom
-          top={yMax}
-          scale={xScale}
-          stroke={axisStroke}
-          tickValues={xTickValues}
-          tickStroke={tickStroke}
-          tickFormat={(x) => {
-            const hour = `${Math.floor(x / 60)}`;
-            const minute = `${x % 60}`;
-            return `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
-          }}
-          tickLabelProps={() => ({
-            fill: tickStroke,
-            fontSize: 11,
-            textAnchor: "middle",
-          })}
-        />
-      </Group>
-    </svg>
+          return <>{nearestDatum.datum[0]}</>;
+        }}
+      />
+    </XYChart>
   );
 }

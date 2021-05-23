@@ -9,15 +9,18 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@visx/axis": "^1.11.1",
+    "@visx/curve": "^1.7.0",
     "@visx/grid": "^1.11.1",
     "@visx/group": "^1.7.0",
     "@visx/responsive": "^1.10.1",
     "@visx/scale": "^1.11.1",
     "@visx/shape": "^1.11.1",
+    "@visx/xychart": "^1.11.2",
     "framer-motion": "^4.1.17",
     "next": "10.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-spring": "^9.1.2",
     "swr": "^0.5.6"
   }
 }
