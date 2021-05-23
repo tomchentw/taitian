@@ -1,11 +1,12 @@
 import * as Chakra from "@chakra-ui/react";
 import * as React from "react";
+import { subDays } from "date-fns";
 import useSWR from "swr";
 import {
   Axis,
   Grid,
-  AreaStack,
-  AreaSeries,
+  AnimatedAreaStack,
+  AnimatedAreaSeries,
   XYChart,
   Tooltip,
   TooltipContext,
@@ -16,6 +17,7 @@ import { toISODateForInput, dateTimeFullFormat } from "../format";
 import Loading from "./Loading";
 
 const MIN_DATE = toISODateForInput(new Date(2021, 4, 20));
+const TODAY = new Date();
 
 function fetcher(...args) {
   return fetch(...args).then((r) => {
@@ -35,10 +37,11 @@ function fetcher(...args) {
 }
 
 export default function ByFuelLoad() {
-  const maxDate = toISODateForInput(new Date());
+  const maxDate = toISODateForInput(TODAY);
   const [date, setDate] = React.useState(maxDate);
   const onChange = React.useCallback(
-    ({ target: { value } }) => {
+    (arg) => {
+      const value = arg?.target?.value ?? arg;
       if (MIN_DATE <= value && value <= maxDate) {
         /**
          * For some browser (ex. Mobile Firefox), the <input type="date" /> does
@@ -49,7 +52,7 @@ export default function ByFuelLoad() {
     },
     [setDate]
   );
-  const { data: response, error } = useSWR(
+  const { data: nullableResponse, error } = useSWR(
     maxDate === date
       ? `/data/raw/loadfueltype.csv`
       : `/data/accumulated/${date.split("-").join("/")}/loadfueltype.csv`,
@@ -58,14 +61,21 @@ export default function ByFuelLoad() {
       refreshInterval: 5 * 60 * 1000,
     }
   );
+  const cachedResponse = React.useRef(nullableResponse);
+  React.useEffect(() => {
+    if (nullableResponse) {
+      cachedResponse.current = nullableResponse;
+    }
+  }, [nullableResponse]);
   if (error) return <div>failed to load</div>;
-  if (!response) {
+  const activeResponse = nullableResponse || cachedResponse.current;
+  if (!activeResponse) {
     return <Loading />;
   }
   return (
     <React.Fragment>
       <Chakra.Heading as="h4" size="md" textAlign="right">
-        現時 {dateTimeFullFormat.format(response.lastModified)}
+        現時 {dateTimeFullFormat.format(activeResponse.lastModified)}
         <br />
         <Chakra.Text as="i" fontSize="sm">
           資料來源每十分鐘自動更新
@@ -74,7 +84,7 @@ export default function ByFuelLoad() {
       <Chakra.FormControl
         id="date"
         mt={4}
-        maxW={[, "450px"]}
+        maxW={[, , "640px"]}
         as={Chakra.Stack}
         direction={["column", , "row"]}
         alignItems={[, , "center"]}
@@ -90,11 +100,22 @@ export default function ByFuelLoad() {
           value={date}
           onChange={onChange}
         />
+        <Chakra.RadioGroup value={date} onChange={onChange}>
+          <Chakra.HStack>
+            <Chakra.Radio value={maxDate}>今天</Chakra.Radio>
+            <Chakra.Radio value={toISODateForInput(subDays(TODAY, 1))}>
+              昨天
+            </Chakra.Radio>
+            <Chakra.Radio value={toISODateForInput(subDays(TODAY, 2))}>
+              前天
+            </Chakra.Radio>
+          </Chakra.HStack>
+        </Chakra.RadioGroup>
         <Chakra.FormHelperText pl={[, 2]}>
           最早可選日期為：{MIN_DATE}
         </Chakra.FormHelperText>
       </Chakra.FormControl>
-      <VXContexualGraph table={response.table} />
+      <VXContexualGraph table={activeResponse.table} />
     </React.Fragment>
   );
 }
@@ -115,7 +136,7 @@ function VXContexualGraph({ table }) {
     <TooltipProvider>
       <Chakra.Stack direction={["column", , "row"]} spacing={2} mt={4}>
         <Chakra.List
-          order={[, , -1]}
+          order={[2, , 0]}
           minWidth={[, , 36]}
           spacing={2}
           alignSelf="center"
@@ -158,7 +179,7 @@ function VXContexualGraph({ table }) {
         <Chakra.Box
           width="100%"
           minHeight={600}
-          order={0}
+          order={1}
           sx={{
             "& svg path": {
               transition: "opacity 0.2s ease-in-out",
@@ -245,9 +266,9 @@ function Graph({ hoveringYIndex, table }) {
     >
       <Grid rows={true} columns={false} />
       <Grid rows={false} tickValues={xTickValues} columns={true} />
-      <AreaStack curve={curveLinear} renderLine={false}>
+      <AnimatedAreaStack curve={curveLinear} renderLine={false}>
         {keys.map((key, index) => (
-          <AreaSeries
+          <AnimatedAreaSeries
             key={key}
             dataKey={key}
             data={table}
@@ -259,7 +280,7 @@ function Graph({ hoveringYIndex, table }) {
             }
           />
         ))}
-      </AreaStack>
+      </AnimatedAreaStack>
       <Axis
         orientation="right"
         label="單位：萬瓩"
