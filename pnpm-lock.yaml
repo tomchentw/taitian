@@ -23,6 +23,7 @@ importers:
       '@emotion/styled': ^11.3.0
       '@visx/curve': ^1.7.0
       '@visx/xychart': ^1.11.2
+      date-fns: ^2.21.3
       framer-motion: ^4.1.17
       next: 10.2.0
       react: 17.0.2
@@ -37,6 +38,7 @@ importers:
       '@emotion/styled': 11.3.0_c94ce1a602d602ceca4c9cb32dbce62d
       '@visx/curve': 1.7.0
       '@visx/xychart': 1.11.2_9aefd54e6f624b17de36c5128a9d780b
+      date-fns: 2.21.3
       framer-motion: 4.1.17_react-dom@17.0.2+react@17.0.2
       next: 10.2.0_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
@@ -2216,6 +2218,11 @@ packages:
   /data-uri-to-buffer/3.0.1:
     resolution: {integrity: sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==}
     engines: {node: '>= 6'}
+
+  /date-fns/2.21.3:
+    resolution: {integrity: sha512-HeYdzCaFflc1i4tGbj7JKMjM4cKGYoyxwcIIkHzNgCkX8xXDNJDZXgDDVchIWpN4eQc3lH37WarduXFZJOtxfw==}
+    engines: {node: '>=0.11'}
+    dev: false
 
   /debounce/1.2.1:
     resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
