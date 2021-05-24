@@ -173,7 +173,7 @@ function VXContexualGraph({ table }) {
         </Chakra.List>
         <Chakra.Box
           width="100%"
-          minHeight={600}
+          height={600}
           order={1}
           sx={{
             "& svg path": {
@@ -231,7 +231,7 @@ const Y_RANGE = [
 ];
 const keys = Object.keys([null /*time slot */].concat(Y_RANGE)).slice(1);
 
-const defaultMargin = { top: 40, right: 50, bottom: 50, left: 20 };
+const defaultMargin = { top: 0, right: 30, bottom: 30, left: 20 };
 
 const gridStroke = "#e0e0e0";
 const axisStroke = "#aaaaaa";
