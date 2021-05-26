@@ -8,7 +8,12 @@ import logger from "./logger.mjs";
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url));
 
-async function run() {
+const COMMAND_FN_BY = {
+  crawl,
+  accumulate,
+};
+
+async function run([commandName]) {
   // Prepare data folder to work with
   if (!process.env.CI) {
     spawn.sync("rm", ["-rf", "public/data"], { stdio: "inherit" });
@@ -18,11 +23,11 @@ async function run() {
   });
   spawn.sync("mv", ["data", "public/data"], { stdio: "inherit" });
 
-  await crawl();
-  await accumulate();
+  const commandFn = COMMAND_FN_BY[commandName];
+  await commandFn();
 }
 
-run()
+run(process.argv.slice(2))
   .then((it) => {
     logger.info("Done!");
   })
