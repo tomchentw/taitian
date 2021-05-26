@@ -6,7 +6,7 @@ on:
       - gh-pages
 
 jobs:
-  update-data:
+  run-accumulate:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,10 +28,12 @@ jobs:
             ${{ runner.os }}-pnpm-
       - run: pnpm install --frozen-lockfile
       - run: pnpm cron accumulate
-      - name: Deploy Data to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          keep_files: true
-          publish_dir: ./public/data
-          destination_dir: ./data
+      - run: |
+          git config user.name 'Tom Chen'
+          git config user.email 'developer@tomchentw.com'
+          git switch gh-pages
+          rm -rf data
+          mv public/data data
+          git add data
+          git commit -m "deploy: accumulated"
+          git push

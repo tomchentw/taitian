@@ -7,7 +7,7 @@ on:
       - gh-pages
 
 jobs:
-  update-data:
+  run-crawl:
     runs-on: ubuntu-latest
 
     steps:
