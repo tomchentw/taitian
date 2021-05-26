@@ -38,11 +38,14 @@ async function genaryToCSV(accumulatedDirPath) {
       }),
   ]);
   const [date, time] = datetime.split(" ");
-  let headerRow = _.head(accumulatedCSV);
-  if (headerRow.includes(`time-${time}`)) {
+  if (!accumulatedDirPath.includes(date.split("-").join("/"))) {
     return;
   }
-  headerRow = `${accumulatedCSV[0].trim()},time-${time},generation-${time},note-${time}\n`;
+  let headerRow = _.head(accumulatedCSV);
+  if (headerRow.includes(`generation-${time}`)) {
+    return;
+  }
+  headerRow = `${accumulatedCSV[0].trim()},generation-${time},note-${time}\n`;
   let appendedCSV;
   if (1 === accumulatedCSV.length) {
     appendedCSV = aaData
@@ -57,7 +60,7 @@ async function genaryToCSV(accumulatedDirPath) {
         ]) => {
           const [_, type] = htmlType.match(/^<A NAME='(\S+)'>.+$/);
           const note = rawNote.trim();
-          return [type, name, capacity, time, generation, note];
+          return [type, name, capacity, generation, note];
         }
       )
       .reduce((acc, it) => `${acc}${it.join(",")}\n`, headerRow);
@@ -65,7 +68,7 @@ async function genaryToCSV(accumulatedDirPath) {
     appendedCSV = aaData
       .map(([, , , generation, , rawNote]) => {
         const note = rawNote.trim();
-        return [time, generation, note];
+        return [generation, note];
       })
       .reduce(
         (acc, it, index) =>
