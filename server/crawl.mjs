@@ -15,6 +15,10 @@ const URL_LIST = [
     url: `https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/genary.json`,
   },
   {
+    pathname: `genloadareaperc.csv`,
+    url: `https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/genloadareaperc.csv`,
+  },
+  {
     pathname: `loadpara.json`,
     url: `https://www.taipower.com.tw/d006/loadGraph/loadGraph/data/loadpara.json`,
   },
