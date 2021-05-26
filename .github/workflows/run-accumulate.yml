@@ -1,17 +1,18 @@
-name: Build site on main branch update
+name: Run accumulate script
 
 on:
   push:
     branches:
-      - main
+      - gh-pages
 
 jobs:
-  build-gh-pages:
+  update-data:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
         with:
+          ref: 'main'
           fetch-depth: 0
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
@@ -26,16 +27,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - name: Copy gh-pages files
-        run: |
-          cp -R .github out/.github
-          rm -rf out/data
-          git restore --source=origin/gh-pages data
-          mv data out/data
-      - name: Deploy to GitHub Pages
+      - run: pnpm cron accumulate
+      - name: Deploy Data to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          exclude_assets: '' # Ensure .github folder is published
-          github_token: ${{ secrets.GITHUB_TOKEN }} # Do NOT use PERSONAL_TOKEN here since this will trigger infinite loop on exec-cron.yml
-          publish_dir: ./out
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          keep_files: true
+          publish_dir: ./public/data
+          destination_dir: ./data
