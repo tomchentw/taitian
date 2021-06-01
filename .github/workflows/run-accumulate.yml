@@ -32,8 +32,9 @@ jobs:
           git config user.name 'Tom Chen'
           git config user.email 'developer@tomchentw.com'
           git switch gh-pages
-          git rm -rf data
-          mv public/data data
-          git add data
-          git commit -m "deploy: $(git rev-parse HEAD)"
+          git rm -rf data/accumulated
+          mv public/data/accumulated data
+          git add data/accumulated
+          git commit -m "deploy(data/accumulated): $(git rev-parse HEAD)"
+          git pull --rebase
           git push
