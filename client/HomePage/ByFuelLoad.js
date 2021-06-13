@@ -1,5 +1,6 @@
 import * as Chakra from "@chakra-ui/react";
 import * as React from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { subDays } from "date-fns";
 import useSWR from "swr";
 import {
@@ -84,8 +85,8 @@ export default function ByFuelLoad() {
       <Chakra.FormControl
         id="date"
         mt={4}
-        maxW={[, , "640px"]}
         as={Chakra.Stack}
+        spacing={2}
         direction={["column", , "row"]}
         alignItems={[, , "center"]}
       >
@@ -93,7 +94,8 @@ export default function ByFuelLoad() {
           選擇日期
         </Chakra.FormLabel>
         <Chakra.Input
-          flex="1 0"
+          flexShrink="0"
+          flexBasis={["100%", , 48]}
           type="date"
           min={MIN_DATE}
           max={maxDate}
@@ -111,11 +113,23 @@ export default function ByFuelLoad() {
             </Chakra.Radio>
           </Chakra.HStack>
         </Chakra.RadioGroup>
-        <Chakra.FormHelperText pl={[, 2]}>
+        <Chakra.FormHelperText>
           最早可選日期為：{MIN_DATE}
         </Chakra.FormHelperText>
       </Chakra.FormControl>
-      <VXContexualGraph table={activeResponse.table} />
+      <ErrorBoundary
+        fallback={
+          <Chakra.Center p={[4, 10, 20]}>
+            <Chakra.Text as="em" color="red">
+              You select a date with a broken data. <br />
+              Try another one!
+            </Chakra.Text>
+          </Chakra.Center>
+        }
+        resetKeys={[activeResponse.table]}
+      >
+        <VXContexualGraph table={activeResponse.table} />
+      </ErrorBoundary>
     </React.Fragment>
   );
 }
