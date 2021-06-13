@@ -1,4 +1,4 @@
-name: Run crawl script
+name: Run cron script
 
 on:
   workflow_dispatch: # Trigger this inifinite loop MANUALLY!!!
@@ -28,10 +28,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
       - run: pnpm install --frozen-lockfile
-      - run: pnpm cron crawl
-      - name: Update data/raw
+      - run: pnpm cron
+      - name: Deploy Data to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }} # Trigger run-crawl.yml
-          publish_dir: ./public/data/raw
-          destination_dir: ./data/raw
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          keep_files: true
+          publish_dir: ./public/data
+          destination_dir: ./data
