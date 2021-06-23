@@ -6,9 +6,25 @@ on:
       - main
 
 jobs:
+  copy-github-folder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Copy .github
+        run: |
+            git config user.name 'Tom Chen'
+            git config user.email 'developer@tomchentw.com'
+            git switch gh-pages
+            git rm -rf .github
+            git restore --source=origin/main .github
+            git add .github
+            git commit -m "deploy: $(git rev-parse HEAD)"
+            git push
+
   build-gh-pages:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
         with:
