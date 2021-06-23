@@ -20,7 +20,7 @@ jobs:
             git rm -rf .github
             git restore --source=origin/main .github
             git add .github
-            git commit -m "deploy: $(git rev-parse HEAD)"
+            git commit -m "deploy: $GITHUB_SHA"
             git push
 
   build-gh-pages:
