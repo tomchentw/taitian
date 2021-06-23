@@ -20,7 +20,7 @@ jobs:
             git rm -rf .github
             git restore --source=origin/main .github
             git add .github
-            git commit -m "deploy: $GITHUB_SHA"
+            git commit -m "deploy(.github): $GITHUB_SHA"
             git push
 
   build-gh-pages:
@@ -44,9 +44,18 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          exclude_assets: 'data' # Also ensure .github folder is published
-          github_token: ${{ secrets.GITHUB_TOKEN }} # Do NOT use ACTIONS_DEPLOY_KEY here since this will trigger infinite loop on exec-cron.yml
-          publish_dir: ./out
+        run: |
+          git config user.name 'Tom Chen'
+          git config user.email 'developer@tomchentw.com'
+          git add -f out
+          git stash
+          git switch gh-pages
+          git rm -rf .
+          git clean -fd
+          git stash pop
+          git mv out/* .
+          git fetch --all
+          git restore -s origin/gh-pages .github data
+          git add -A
+          git commit -m "deploy(.next): $GITHUB_SHA"
+          git push
