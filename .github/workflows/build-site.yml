@@ -36,7 +36,8 @@ jobs:
           git rm -rf .
           git clean -fd
           git stash pop
-          git mv out/* .
+          cp -a out/. .
+          git rm -rf out
           git fetch --all
           git restore --source=origin/main .github
           git restore --source=origin/gh-pages data
