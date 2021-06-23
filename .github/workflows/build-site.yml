@@ -43,16 +43,10 @@ jobs:
             ${{ runner.os }}-pnpm-
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - name: Copy gh-pages files
-        run: |
-          cp -R .github out/.github
-          rm -rf out/data
-          git restore --source=origin/gh-pages data
-          mv data out/data
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main'
         with:
-          exclude_assets: '' # Ensure .github folder is published
-          github_token: ${{ secrets.GITHUB_TOKEN }} # Do NOT use PERSONAL_TOKEN here since this will trigger infinite loop on exec-cron.yml
+          exclude_assets: 'data' # Also ensure .github folder is published
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Do NOT use ACTIONS_DEPLOY_KEY here since this will trigger infinite loop on exec-cron.yml
           publish_dir: ./out
